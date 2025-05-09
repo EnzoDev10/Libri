@@ -1,0 +1,16 @@
+button {
+	background-color: var(--accent-color);
+	padding: 10px 10px;
+	border: none;
+	border-radius: 5px;
+	display: flex;
+	gap: 15px;
+	align-items: center;
+	color: inherit;
+	border: 1px solid var(--text-light);
+}
+
+.icon {
+	width: 1.3em;
+	height: 1.3em;
+}
