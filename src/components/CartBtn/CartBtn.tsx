@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 import { ShoppingCart } from 'lucide-react';
-const Btn = styled.button`
+/* const Btn = styled.button`
 	background-color: var(--dark-green);
 	padding: 10px 10px;
 	border: none;
@@ -9,16 +8,16 @@ const Btn = styled.button`
 	gap: 15px;
 	align-items: center;
 `;
-
-const Icon = styled(ShoppingCart)`
+ */
+/* const Icon = styled(ShoppingCart)`
 	width: 1.3em;
 	height: 1.3em;
 `;
-
+ */
 export const CartBtn = () => {
 	return (
-		<Btn className='hover'>
-			<Icon />N
-		</Btn>
+		<button className='hover'>
+			<ShoppingCart />N
+		</button>
 	);
 };
