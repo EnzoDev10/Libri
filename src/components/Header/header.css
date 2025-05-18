@@ -1,7 +1,6 @@
 header {
 	background-color: var(--dark-bg);
 	color: var(--text-light);
-	padding: 10px 0;
 }
 
 header .wrapper {
