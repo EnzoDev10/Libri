@@ -1,17 +1,19 @@
 header {
 	background-color: var(--dark-bg);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	color: var(--text-light);
+	padding: 10px 0;
+}
+
+header .wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin: 0 auto;
 }
 
 nav ul {
 	display: flex;
 	align-items: center;
 	gap: 25px;
-    font-size: var();
+	font-size: var();
 }

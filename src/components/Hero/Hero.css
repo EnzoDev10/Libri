@@ -1,17 +1,20 @@
 .hero {
-	align-items: center;
 	background-color: var(--hero-bg);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	padding: 60px;
 }
 
+.hero .wrapper {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .hero .text-wrapper {
-	font-size: 100px;
+	font-size: 6.2rem;
 	font-weight: 700;
 }
-.subtitle {
+.hero .subtitle {
 	color: #ccc;
 	font-size: 20px;
 	font-style: italic;

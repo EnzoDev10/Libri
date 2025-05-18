@@ -34,7 +34,9 @@ ul {
 }
 
 .wrapper {
-	padding: 10px 20px;
+	margin: 0 auto;
+	padding: 0 20px;
+	width: 90vw;
 }
 
 .logo {
@@ -47,5 +49,11 @@ ul {
 
 	&:hover {
 		transform: translateY(-3px);
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.wrapper {
+		max-width: 1200px;
 	}
 }
