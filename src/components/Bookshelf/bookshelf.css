@@ -1,5 +1,6 @@
 main {
 	background-color: var(--products-bg);
+	padding: 20px;
 }
 
 h2 {
