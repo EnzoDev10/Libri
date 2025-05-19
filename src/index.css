@@ -7,12 +7,15 @@
 	--accent-color: #06396f;
 	--text-dark: #222222;
 	--text-light: #ffffff;
-	/* number */
+
 	--size-paragraph: 1rem;
 	--size-link: 1.5rem;
 	--size-heading-1: 8rem;
-	/* string */
+
 	--main-font: lato;
+
+	--radius-large: 10px;
+	--radius-small: 5px;
 }
 
 * {

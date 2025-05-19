@@ -1,16 +1,20 @@
 button {
 	background-color: var(--accent-color);
-	padding: 10px 10px;
+	padding: 10px;
 	border: none;
-	border-radius: 5px;
+	border-radius: var(--radius-small);
 	display: flex;
 	gap: 15px;
 	align-items: center;
 	color: inherit;
+	font-weight: bold;
+}
+
+.border {
 	border: 1px solid var(--text-light);
 }
 
 .icon {
-	width: 1.3em;
-	height: 1.3em;
+	width: 1.2rem;
+	height: 1.2rem;
 }

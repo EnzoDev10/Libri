@@ -1,4 +1,4 @@
-import { CartBtn } from '../index';
+import { Button } from '../index';
 import './header.css';
 
 export const Header = () => {
@@ -24,7 +24,7 @@ export const Header = () => {
 							</a>
 						</li>
 						<li>
-							<CartBtn />
+							<Button Icon Label='0' />
 						</li>
 					</ul>
 				</nav>
