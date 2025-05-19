@@ -1,0 +1,23 @@
+main {
+	background-color: var(--products-bg);
+}
+
+h2 {
+	color: var(--text-dark);
+}
+
+section {
+	background-color: var(--light-bg);
+	padding: 20px 10px;
+	border-radius: var(--radius-large);
+	display: flex;
+	flex-direction: column;
+
+	gap: 15px;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
