@@ -38,6 +38,10 @@
 		color: var(--text-light);
 	}
 
+	&:focus-visible ~ label {
+		outline: 2px solid red;
+	}
+
 	&:checked ~ label {
 		background-color: var(--accent-color);
 		color: var(--text-light);

@@ -32,6 +32,11 @@ a {
 	display: inline-block;
 }
 
+button,
+input[type='radio'] {
+	cursor: pointer;
+}
+
 ul {
 	list-style: none;
 }
