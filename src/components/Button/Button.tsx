@@ -13,7 +13,7 @@ interface Props {
 export const Button = ({ Label, Icon, className }: Props) => {
 	return (
 		<button
-			className={className}
+			className={`hover ${className}`}
 			onClick={() => {
 				console.log(`boton con label ${Label} presionado`);
 			}}
