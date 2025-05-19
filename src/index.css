@@ -55,6 +55,10 @@ ul {
 	}
 }
 
+.border {
+	border: 1px solid var(--text-light);
+}
+
 @media screen and (min-width: 1280px) {
 	.wrapper {
 		max-width: 1200px;

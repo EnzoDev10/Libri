@@ -24,7 +24,7 @@ export const Header = () => {
 							</a>
 						</li>
 						<li>
-							<Button Icon Label='0' />
+							<Button className='border' Icon='cart' Label='0' />
 						</li>
 					</ul>
 				</nav>
