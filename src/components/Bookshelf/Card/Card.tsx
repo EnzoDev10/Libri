@@ -1,25 +1,24 @@
 import { Button } from '../../index';
 import './card.css';
 
-interface Props {
-	ImageSrc: string;
-	BookTitle: string;
-	BookAuthor: string;
-}
+import type { Book } from '../../interfaces';
 
-export const Card = ({ ImageSrc, BookTitle, BookAuthor }: Props) => {
+export const Card = ({ coverId, title, author, price }: Book) => {
 	return (
 		<article className='card'>
 			<div className='image-container'>
-				<img src={ImageSrc} alt={`${BookTitle}-${BookAuthor}`} />
+				<img
+					src={`https://covers.openlibrary.org/b/id/${coverId}-M.jpg`}
+					alt={`${title}-${author}`}
+				/>
 			</div>
 			<div className='book-info'>
 				<div>
-					<p className='title'>{BookTitle}</p>
-					<p className='author'>{BookAuthor}</p>
+					<p className='title'>{title}</p>
+					<p className='author'>{author}</p>
 				</div>
-				<div className='book-infof'>
-					<p className='price'>$Price{/* aleatorio */}</p>
+				<div className='book-buy'>
+					<p className='price'>${price}</p>
 					<Button Label='comprar' />
 				</div>
 			</div>
