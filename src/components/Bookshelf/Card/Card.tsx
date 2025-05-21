@@ -3,12 +3,20 @@ import './card.css';
 
 import type { Book } from '../../interfaces';
 
+import Cover from '../../../assets/Cover-placeholder.png';
+
 export const Card = ({ coverId, title, author, price }: Book) => {
 	return (
 		<article className='card'>
 			<div className='image-container'>
 				<img
-					src={`https://covers.openlibrary.org/b/id/${coverId}-M.jpg`}
+				width={200}
+				height={300}
+					src={
+						coverId
+							? `https://Covers.openlibrary.org/b/id/${coverId}-M.jpg`
+							: Cover
+					}
 					alt={`${title}-${author}`}
 				/>
 			</div>
