@@ -18,6 +18,22 @@ function randomPrice() {
 	return Number(Intl.NumberFormat('es-AR').format(randomInt));
 }
 
+function Books({ arr }: { arr: Book[] }) {
+	return (
+		<>
+			{Array.from({ length: arr.length }).map((_, index) => (
+				<Card
+					title={`${arr[index].title}- cover ${arr[index].coverId}`}
+					author={arr[index].author}
+					coverId={arr[index].coverId}
+					price={arr[index].price}
+					key={index}
+				/>
+			))}
+		</>
+	);
+}
+
 export const Bookshelf = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [booksData, setBooksData] = useState<Book[]>([
@@ -72,16 +88,7 @@ export const Bookshelf = () => {
 						</nav>
 						<article className='data'>
 							{isLoading && <h2>Cargando...</h2>}
-							{!isLoading && booksData[0] && (
-								<>
-									<Card
-										coverId={booksData[0].coverId}
-										title={booksData[0].title}
-										author={booksData[0].author}
-										price={booksData[0].price}
-									/>
-								</>
-							)}
+							{!isLoading && booksData[0] && <Books arr={booksData} />}
 							{!isLoading && !booksData[0] && (
 								<div className='error'>
 									<X size={64} />
