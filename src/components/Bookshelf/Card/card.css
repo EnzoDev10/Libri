@@ -8,6 +8,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: #abb;
 }
 
 .card span,
@@ -36,6 +37,8 @@
 		margin-bottom: 15px;
 		height: 200px;
 		z-index: 200;
+		border: 1px solid #bbb;
+		border-radius: 2.5px;
 	}
 }
 
@@ -50,8 +53,7 @@
 	margin-top: 10px;
 }
 
-.image-container::before {
-	content: '';
+.bg {
 	background-color: var(--green);
 	width: 100%;
 	height: 75%;

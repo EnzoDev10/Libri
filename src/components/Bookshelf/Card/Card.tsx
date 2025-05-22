@@ -5,7 +5,17 @@ import type { Book } from '../../interfaces';
 
 import Cover from '../../../assets/Cover-placeholder.png';
 
+import { useExtractColors } from 'react-extract-colors';
+
 export const Card = ({ coverId, title, author, price }: Book) => {
+	const imageUrl = coverId
+		? `https://Covers.openlibrary.org/b/id/${coverId}-M.jpg`
+		: Cover;
+
+	const { dominantColor } = useExtractColors(imageUrl);
+
+	const color = dominantColor ? dominantColor : '#333';
+	console.log(color);
 	return (
 		<article className='card'>
 			<div className='image-container'>
@@ -13,13 +23,10 @@ export const Card = ({ coverId, title, author, price }: Book) => {
 					width={125}
 					height={200}
 					loading='lazy'
-					src={
-						coverId
-							? `https://Covers.openlibrary.org/b/id/${coverId}-M.jpg`
-							: Cover
-					}
+					src={imageUrl}
 					alt={`${title}-${author}`}
 				/>
+				<div className='bg' style={{ backgroundColor: color }}></div>
 			</div>
 			<div className='book-info'>
 				<div className='title-container'>
