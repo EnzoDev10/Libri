@@ -10,8 +10,9 @@ export const Card = ({ coverId, title, author, price }: Book) => {
 		<article className='card'>
 			<div className='image-container'>
 				<img
-				width={200}
-				height={300}
+					width={125}
+					height={200}
+					loading='lazy'
 					src={
 						coverId
 							? `https://Covers.openlibrary.org/b/id/${coverId}-M.jpg`
@@ -21,8 +22,10 @@ export const Card = ({ coverId, title, author, price }: Book) => {
 				/>
 			</div>
 			<div className='book-info'>
-				<div>
-					<p className='title'>{title}</p>
+				<div className='title-container'>
+					<p className='title' title={title}>
+						{title}
+					</p>
 					<p className='author'>{author}</p>
 				</div>
 				<div className='book-buy'>

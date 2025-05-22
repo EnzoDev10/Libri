@@ -9,7 +9,7 @@ h2 {
 
 main .wrapper section {
 	background-color: var(--light-bg);
-	padding: 20px 10px;
+	padding: 20px 30px;
 	border-radius: var(--radius-large);
 	display: flex;
 	flex-direction: column;
@@ -26,8 +26,9 @@ nav {
 .data {
 	display: flex;
 	gap: 20px;
-	padding: 20px;
+	padding: 20px 0;
 	align-items: center;
+	justify-content: center;
 	flex-wrap: wrap;
 }
 

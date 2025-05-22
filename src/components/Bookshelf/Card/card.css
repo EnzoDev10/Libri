@@ -1,7 +1,7 @@
 .card {
 	border: 1px solid var(--text-dark);
 	width: 220px;
-	height: fit-content;
+	max-height: 360px;
 	border-radius: var(--radius-small);
 	padding: 20px;
 	font-weight: bold;
@@ -10,8 +10,16 @@
 	align-items: center;
 }
 
+.card span,
 .card p {
 	color: var(--text-dark);
+}
+
+.title {
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .image-container {
@@ -20,6 +28,15 @@
 	height: fit-content;
 	display: flex;
 	justify-content: center;
+
+	img {
+		position: relative;
+		max-width: 125px;
+		width: 100%;
+		margin-bottom: 15px;
+		height: 200px;
+		z-index: 200;
+	}
 }
 
 .book-info {
@@ -45,13 +62,4 @@
 	bottom: 0;
 	border-radius: var(--radius-small);
 	margin: auto;
-}
-
-img {
-	position: relative;
-	max-width: 125px;
-	width: 100%;
-	margin-bottom: 15px;
-	height: auto;
-	z-index: 200;
 }
