@@ -36,6 +36,7 @@ function Books({ arr }: { arr: Book[] }) {
 
 export const Bookshelf = () => {
 	const [isLoading, setIsLoading] = useState(true);
+	const [errorExist, setErrorExist] = useState(false);
 	const [booksData, setBooksData] = useState<Book[]>([
 		{
 			title: 'title',
@@ -51,7 +52,6 @@ export const Bookshelf = () => {
 				if (response.ok) {
 					response.json().then((data) => {
 						const firstTen = data.docs.slice(0, 10);
-						console.log(firstTen);
 						const arr: Book[] = [];
 						for (let i = 0; i < firstTen.length; i++) {
 							const obj: Book = {
@@ -65,14 +65,12 @@ export const Bookshelf = () => {
 						setBooksData(arr);
 						setIsLoading(false);
 					});
-				} else {
-					console.log('Hubo un problema con la petición Fetch');
-					setIsLoading(false);
 				}
 			})
 			.catch((error) => {
 				console.log('Hubo un problema con la petición Fetch:' + error.message);
 				setIsLoading(false);
+				setErrorExist(true);
 			});
 	}, []);
 
@@ -88,12 +86,14 @@ export const Bookshelf = () => {
 						</nav>
 						<article className='data'>
 							{isLoading && <h2>Cargando...</h2>}
-							{!isLoading && booksData[0] && <Books arr={booksData} />}
-							{!isLoading && !booksData[0] && (
+							{errorExist && (
 								<div className='error'>
 									<X size={64} />
 									<p>Ocurrió un error.</p>
 								</div>
+							)}
+							{!errorExist && !isLoading && booksData[0] && (
+								<Books arr={booksData} />
 							)}
 						</article>
 					</section>
