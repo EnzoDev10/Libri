@@ -1,14 +1,15 @@
-import { Header } from '../components';
+import { Header, Books } from '../components';
 
-import { UseCart } from '../context/Context';
+import { UseCart } from '../context/CartContext';
 
 export const Cart = () => {
-	const cart = UseCart();
-	console.log(cart);
+	const { cartContent } = UseCart();
 	return (
 		<>
 			<Header />
-			<main>hola</main>
+			<main>
+				<Books arrayOfBooks={cartContent} variant='cart' />
+			</main>
 		</>
 	);
 };

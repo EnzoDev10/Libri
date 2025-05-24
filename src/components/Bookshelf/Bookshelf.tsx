@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { Categories } from './Categories/Categories';
 
 import { Searchbar } from './SearchBar/SearchBar';
-import { Card } from './Card/Card';
+
+import { Books } from '../index';
+
+import { X } from 'lucide-react';
 
 import './Bookshelf.css';
 
 import type { Book } from '../../interfaces';
-import { X } from 'lucide-react';
 
 function randomPrice() {
 	const max = 50000;
@@ -16,22 +18,6 @@ function randomPrice() {
 	const randomInt = Math.floor(Math.random() * (max - min)) + min;
 
 	return Number(Intl.NumberFormat('es-AR').format(randomInt));
-}
-
-function Books({ arr }: { arr: Book[] }) {
-	return (
-		<>
-			{Array.from({ length: arr.length }).map((_, index) => (
-				<Card
-					title={`${arr[index].title}- cover ${arr[index].coverId}`}
-					author={arr[index].author}
-					coverId={arr[index].coverId}
-					price={arr[index].price}
-					key={index}
-				/>
-			))}
-		</>
-	);
 }
 
 export const Bookshelf = () => {
@@ -93,7 +79,7 @@ export const Bookshelf = () => {
 								</div>
 							)}
 							{!errorExist && !isLoading && booksData[0] && (
-								<Books arr={booksData} />
+								<Books arrayOfBooks={booksData} variant='bookshelf' />
 							)}
 						</article>
 					</section>

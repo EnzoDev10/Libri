@@ -2,22 +2,16 @@ import './button.css';
 
 import { Search, ShoppingCart } from 'lucide-react';
 
-interface Props {
-	/* 	parentMethod: () => null;
-	 */
+interface btnProps {
 	Label: string;
 	Icon?: 'cart' | 'search';
 	className?: string;
+	parentMethod: () => void;
 }
 
-export const Button = ({ Label, Icon, className }: Props) => {
+export const Button = ({ Label, Icon, className, parentMethod }: btnProps) => {
 	return (
-		<button
-			className={`hover ${className}`}
-			onClick={() => {
-				console.log(`boton con label ${Label} presionado`);
-			}}
-		>
+		<button className={`hover ${className}`} onClick={parentMethod}>
 			{Icon == 'cart' && <ShoppingCart className='icon' />}
 			{Icon == 'search' && <Search className='icon' />}
 			{Label}

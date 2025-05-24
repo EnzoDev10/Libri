@@ -1,14 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home,Cart } from './pages/pagesIndex';
+import { Home, Cart } from './pages/pagesIndex';
+
+import { CartContextProvider } from './context/CartContext';
+
 function App() {
 	return (
 		<>
-			<Routes>
-				<Route path='/' element={<Home />} />
+			<CartContextProvider>
+				<Routes>
+					<Route path='/' element={<Home />} />
 
-				<Route path='/carrito' element={<Cart />} />
-			</Routes>
+					<Route path='/carrito' element={<Cart />} />
+				</Routes>
+			</CartContextProvider>
 		</>
 	);
 }
