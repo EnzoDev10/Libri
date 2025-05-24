@@ -1,7 +1,7 @@
 import { Button } from '../../index';
 import './card.css';
 
-import type { Book } from '../../interfaces';
+import type { Book } from '../../../interfaces';
 
 import Cover from '../../../assets/Cover-placeholder.png';
 
@@ -15,7 +15,6 @@ export const Card = ({ coverId, title, author, price }: Book) => {
 	const { dominantColor } = useExtractColors(imageUrl);
 
 	const color = dominantColor ? dominantColor : '#333';
-	console.log(color);
 	return (
 		<article className='card'>
 			<div className='image-container'>

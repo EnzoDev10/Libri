@@ -7,7 +7,7 @@ import { Card } from './Card/Card';
 
 import './Bookshelf.css';
 
-import type { Book } from '../interfaces';
+import type { Book } from '../../interfaces';
 import { X } from 'lucide-react';
 
 function randomPrice() {
