@@ -10,9 +10,8 @@ header .wrapper {
 	margin: 0 auto;
 }
 
-nav ul {
+.headerNav ul {
 	display: flex;
 	align-items: center;
 	gap: 25px;
-	font-size: var();
 }

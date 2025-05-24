@@ -1,9 +1,14 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home } from './pages/Home';
+import { Home,Cart } from './pages/pagesIndex';
 function App() {
 	return (
 		<>
-			<Home />
+			<Routes>
+				<Route path='/' element={<Home />} />
+
+				<Route path='/carrito' element={<Cart />} />
+			</Routes>
 		</>
 	);
 }
