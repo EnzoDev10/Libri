@@ -62,7 +62,7 @@ export const Bookshelf = () => {
 
 	return (
 		<>
-			<main>
+			<main className='bookshelf'>
 				<div className='wrapper'>
 					<section>
 						<h2>Productos</h2>
