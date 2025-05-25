@@ -1,4 +1,4 @@
-import { Header, Hero, Bookshelf } from '../components';
+import { Header, Hero, Bookshelf } from '../../components';
 
 export const Home = () => {
 	return (
