@@ -10,6 +10,14 @@ button {
 	font-weight: bold;
 }
 
+.delete-btn {
+	background-color: var(--delete-btn-bg);
+
+	&:hover {
+		background-color: var(--delete-btn-bg-hover);
+	}
+}
+
 .icon {
 	width: 1.2rem;
 	height: 1.2rem;

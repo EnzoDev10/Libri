@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../index';
 
+import { UseCart } from '../../../context/CartContext';
 interface Prop {
 	variant: 'headerNav' | 'footerNav';
 }
 
 export const NavBar = ({ variant }: Prop) => {
+	const { cartContent } = UseCart();
+
 	return (
 		<nav className={variant}>
 			<ul>
@@ -22,7 +25,9 @@ export const NavBar = ({ variant }: Prop) => {
 				</li>
 				<li>
 					<Link to='/carrito' className='hover'>
-						<Button className='border' Icon='cart' Label='0' />
+						<Button className='border' Icon='cart' parentMethod={() => {}}>
+							{cartContent.length}
+						</Button>
 					</Link>
 				</li>
 			</ul>

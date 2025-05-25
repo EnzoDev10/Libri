@@ -22,13 +22,15 @@ export const Card = ({ book, action, variant }: cardProps) => {
 
 	const color = dominantColor ? dominantColor : '#333';
 
+	// ! crear estilos especificos para tipo de card.Bookshelf y cart.
+	// nombrar las clases asi {variante}-card
+
 	return (
-		<article className='card'>
+		<article className={`card ${variant}-card`}>
 			<div className='image-container'>
 				<img
 					width={125}
 					height={200}
-					loading='lazy'
 					src={imageUrl}
 					alt={`${book.title}-${book.author}`}
 				/>
@@ -43,10 +45,9 @@ export const Card = ({ book, action, variant }: cardProps) => {
 				</div>
 				<div className='book-buy'>
 					<p className='price'>${book.price}</p>
-					<Button
-						Label={variant == 'bookshelf' ? 'agregar' : 'eliminar'}
-						parentMethod={() => action(book)}
-					/>
+					<Button parentMethod={() => action(book)}>
+						{variant == 'bookshelf' ? 'agregar' : 'eliminar'}
+					</Button>
 				</div>
 			</div>
 		</article>
