@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { randomInt } from '../../helpers';
+
 import { Categories } from './Categories/Categories';
 
 import { Searchbar } from './SearchBar/SearchBar';
@@ -15,9 +17,9 @@ import type { Book } from '../../interfaces';
 function randomPrice() {
 	const max = 50000;
 	const min = 12000;
-	const randomInt = Math.floor(Math.random() * (max - min)) + min;
+	const ranNum = randomInt(min, max);
 
-	return Number(Intl.NumberFormat('es-AR').format(randomInt));
+	return Number(Intl.NumberFormat('es-AR').format(ranNum));
 }
 
 export const Bookshelf = () => {

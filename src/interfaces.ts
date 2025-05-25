@@ -3,6 +3,7 @@ interface Book {
 	author: string;
 	coverId: number;
 	price: number;
+	id?: string;
 }
 
 export type { Book };
