@@ -14,9 +14,7 @@ export const Cart = () => {
 					<section className='products-section'>
 						{cartContent.length == 0 ? (
 							<h2>No hay ningún producto en el carrito</h2>
-						) : (
-							null
-						)}
+						) : null}
 						<Books arrayOfBooks={cartContent} variant='cart' />
 					</section>
 					<section className='checkout'>
