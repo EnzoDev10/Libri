@@ -6,11 +6,12 @@
 
 .products-section {
 	display: flex;
-	gap: 20px;
-	padding: 20px 0;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
 	flex-wrap: wrap;
+
+	.cart-message {
+		color: var(--text-dark);
+	}
 }
 
 .checkout {
