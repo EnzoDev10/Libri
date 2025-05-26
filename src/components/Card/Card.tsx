@@ -22,9 +22,6 @@ export const Card = ({ book, action, variant }: cardProps) => {
 
 	const color = dominantColor ? dominantColor : '#333';
 
-	// ! crear estilos especificos para tipo de card.Bookshelf y cart.
-	// nombrar las clases asi {variante}-card
-
 	return (
 		<article className={`card ${variant}-card`}>
 			<div className='image-container'>
