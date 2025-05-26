@@ -12,16 +12,14 @@ export const Books = (Props: {
 	const action = Props.variant == 'bookshelf' ? addToCart : removeFromCart;
 	return (
 		<>
-			<article className='displayed-books'>
-				{Array.from({ length: Props.arrayOfBooks.length }).map((_, index) => (
-					<Card
-						book={Props.arrayOfBooks[index]}
-						variant={Props.variant}
-						action={action}
-						key={index}
-					/>
-				))}
-			</article>
+			{Array.from({ length: Props.arrayOfBooks.length }).map((_, index) => (
+				<Card
+					book={Props.arrayOfBooks[index]}
+					variant={Props.variant}
+					action={action}
+					key={index}
+				/>
+			))}
 		</>
 	);
 };
