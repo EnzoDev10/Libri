@@ -1,5 +1,6 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home } from './pages/pagesIndex';
+import { Home, Cart } from './pages/pagesIndex';
 
 import { CartContextProvider } from './context/CartContext';
 
@@ -7,9 +8,11 @@ function App() {
 	return (
 		<>
 			<CartContextProvider>
-				<Home />
-				{/* 				<Cart />
-				 */}
+				<Routes>
+					<Route path='/' element={<Home />} />
+
+					<Route path='/carrito' element={<Cart />} />
+				</Routes>
 			</CartContextProvider>
 		</>
 	);

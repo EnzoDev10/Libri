@@ -2,7 +2,7 @@
 	"name": "vite-project",
 	"private": true,
 	"version": "0.0.0",
-	"homepage": "https://EnzoDev10.github.io/Libri/",
+	"homepage": "https://EnzoDev10.github.io",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
