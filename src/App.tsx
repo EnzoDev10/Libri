@@ -9,7 +9,7 @@ function App() {
 		<>
 			<CartContextProvider>
 				<Routes>
-					<Route path='/' element={<Home />} />
+					<Route path='/inicio' element={<Home />} />
 
 					<Route path='/carrito' element={<Cart />} />
 				</Routes>
