@@ -58,6 +58,15 @@ ul {
 	min-width: 300px;
 }
 
+.displayed-books {
+	display: flex;
+	gap: 20px;
+	padding: 20px 0;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
 .logo {
 	font-weight: 700;
 	font-size: 1.5rem;
