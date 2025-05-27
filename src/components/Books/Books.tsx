@@ -5,11 +5,12 @@ import { UseCart } from '../../context/CartContext';
 import { Card } from '../index';
 
 export const Books = (Props: {
-	arrayOfBooks: Book[];
+	arrayOfBooks: Book[] | [];
 	variant: 'bookshelf' | 'cart';
 }) => {
 	const { addToCart, removeFromCart } = UseCart();
 	const action = Props.variant == 'bookshelf' ? addToCart : removeFromCart;
+
 	return (
 		<>
 			<article className='displayed-books'>

@@ -14,6 +14,8 @@ import './Bookshelf.css';
 
 import type { Book } from '../../interfaces';
 
+import { UseProducts } from '../../context/productsContext';
+
 function randomPrice() {
 	const max = 50000;
 	const min = 12000;
@@ -25,16 +27,16 @@ function randomPrice() {
 export const Bookshelf = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [errorExist, setErrorExist] = useState(false);
-	const [booksData, setBooksData] = useState<Book[]>([
-		{
-			title: 'title',
-			author: 'author',
-			coverId: 1234567,
-			price: 9.99,
-		},
-	]);
-
+	const [bookshelfBooks, setBookshelfBooks] = useState<Book[] | null>();
+	const { productsContent, setProductsContent, needToFetch, setNeedToFetch } =
+		UseProducts();
 	useEffect(() => {
+		if (needToFetch == false) {
+			setBookshelfBooks(productsContent);
+			setIsLoading(false);
+
+			return;
+		}
 		fetch('https://openlibrary.org/search.json?author=lovecraft')
 			.then((response) => {
 				if (response.ok) {
@@ -50,7 +52,9 @@ export const Bookshelf = () => {
 							};
 							arr.push(obj);
 						}
-						setBooksData(arr);
+						setProductsContent(arr);
+						setBookshelfBooks(arr);
+						setNeedToFetch(false);
 						setIsLoading(false);
 					});
 				}
@@ -60,7 +64,7 @@ export const Bookshelf = () => {
 				setIsLoading(false);
 				setErrorExist(true);
 			});
-	}, []);
+	}, [setProductsContent, needToFetch, setNeedToFetch, productsContent]);
 
 	return (
 		<>
@@ -80,8 +84,8 @@ export const Bookshelf = () => {
 									<p>Ocurrió un error.</p>
 								</div>
 							)}
-							{!errorExist && !isLoading && booksData[0] && (
-								<Books arrayOfBooks={booksData} variant='bookshelf' />
+							{!errorExist && !isLoading && bookshelfBooks && (
+								<Books arrayOfBooks={bookshelfBooks} variant='bookshelf' />
 							)}
 						</article>
 					</section>
