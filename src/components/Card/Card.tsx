@@ -18,7 +18,7 @@ export const Card = ({ book, action, variant }: cardProps) => {
 		? `https://Covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
 		: Cover;
 
-	const { dominantColor } = useExtractColors(imageUrl);
+	const { dominantColor } = useExtractColors(imageUrl, { maxSize: 100 });
 
 	const color = dominantColor ? dominantColor : '#333';
 
