@@ -5,3 +5,4 @@ export { Button } from './Button/Button';
 export { NavBar } from './Navigation/NavBar/NavBar';
 export { Card } from './Card/Card';
 export { Books } from './Books/Books';
+export { Footer } from './Navigation/Footer/Footer';

@@ -1,4 +1,4 @@
-import { Header, Books, Button } from '../../components';
+import { Header, Books, Button, Footer } from '../../components';
 
 import { UseCart } from '../../context/contextIndex';
 
@@ -21,15 +21,18 @@ export const Cart = () => {
 						<Books arrayOfBooks={cartContent} variant='cart' />
 					</section>
 					<section className='checkout'>
-						<Button
-							className='border delete-btn'
-							parentMethod={() => emptyCart()}
-						>
-							Vaciar Carrito
-						</Button>
+						<article>
+							<Button
+								className='border delete-btn'
+								parentMethod={() => emptyCart()}
+							>
+								Vaciar Carrito
+							</Button>
+						</article>
 					</section>
 				</div>
 			</main>
+			<Footer />
 		</>
 	);
 };

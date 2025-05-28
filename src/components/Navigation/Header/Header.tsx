@@ -6,7 +6,7 @@ export const Header = () => {
 		<header>
 			<div className='wrapper'>
 				<span className='logo'>Libri.</span>
-				<NavBar variant='headerNav' />
+				<NavBar variant='header' className='headerNav' />
 			</div>
 		</header>
 	);
