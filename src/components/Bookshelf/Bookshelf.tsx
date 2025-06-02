@@ -10,7 +10,7 @@ import { Books } from '../index';
 
 import { X } from 'lucide-react';
 
-import './Bookshelf.css';
+import './bookshelf.css';
 
 import type { Book } from '../../interfaces';
 

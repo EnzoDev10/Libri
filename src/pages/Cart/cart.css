@@ -1,22 +1,22 @@
 .cart .wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .products-section {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	height: 50vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 50vh;
 
-	.cart-message {
-		color: var(--text-dark);
-	}
+  .cart-message {
+    color: var(--text-dark);
+  }
 }
 
 .checkout {
-	display: flex;
-	justify-content: center;
-	height: 50vh;
+  display: flex;
+  justify-content: center;
+  height: 50vh;
 }

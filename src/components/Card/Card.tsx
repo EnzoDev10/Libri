@@ -3,7 +3,7 @@ import './card.css';
 
 import type { Book } from '../../interfaces';
 
-import Cover from '../../assets/Cover-placeholder.png';
+import Cover from './cover-placeholder.png';
 
 import { useExtractColors } from 'react-extract-colors';
 
