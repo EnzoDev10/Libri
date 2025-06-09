@@ -1,91 +1,98 @@
 :root {
-	--dark-bg: #021526;
-	--light-bg: #d9d9d9;
-	--products-bg: #0c396f;
-	--hero-bg: #27445d;
-	--delete-btn-bg: #b0041a;
-	--delete-btn-bg-hover: #500711;
+    --dark-bg: #021526;
+    --light-bg: #d9d9d9;
+    --products-bg: #0c396f;
+    --hero-bg: #27445d;
+    --delete-btn-bg: #b0041a;
+    --delete-btn-bg-hover: #500711;
 
-	--accent-color: #06396f;
-	--text-dark: #222222;
-	--text-light: #ffffff;
+    --accent-color: #06396f;
+    --text-dark: #222222;
+    --text-light: #ffffff;
 
-	--green: #818c78;
+    --green: #818c78;
 
-	--size-paragraph: 1rem;
-	--size-link: 1.5rem;
-	--size-heading-1: 8rem;
+    --size-paragraph: 1rem;
+    --size-link: 1.5rem;
+    --size-heading-1: 8rem;
 
-	--main-font: lato;
+    --main-font: lato;
 
-	--radius-large: 10px;
-	--radius-small: 5px;
+    --radius-large: 10px;
+    --radius-small: 5px;
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: var(--main-font), sans-serif;
-	color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font), sans-serif;
+    color: var(--text-light);
 }
 
+html {
+    height: 100vh;
+}
+
+#root {
+    height: 100vh;
+}
 a {
-	text-decoration: none;
-	color: inherit;
-	display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
 }
 
 button,
-input[type='radio'] {
-	cursor: pointer;
+input[type="radio"] {
+    cursor: pointer;
 }
 
 ul {
-	list-style: none;
+    list-style: none;
 }
 
 .wrapper {
-	margin: 0 auto;
-	padding: 10px 20px;
-	width: 90vw;
+    margin: 0 auto;
+    padding: 10px 20px;
+    width: 90vw;
 }
 
 .wrapper section:first-child {
-	background-color: var(--light-bg);
-	padding: 20px 30px;
-	border-radius: var(--radius-large);
-	min-width: 300px;
+    background-color: var(--light-bg);
+    padding: 20px 30px;
+    border-radius: var(--radius-large);
+    min-width: 300px;
 }
 
 .displayed-books {
-	display: flex;
-	gap: 20px;
-	padding: 20px 0;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .logo {
-	font-weight: 700;
-	font-size: 1.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .hover {
-	transition: all 500ms;
+    transition: all 500ms;
 
-	&:hover {
-		transform: translateY(-3px);
-	}
+    &:hover {
+        transform: translateY(-3px);
+    }
 }
 
 .border {
-	border: 1px solid var(--text-light);
+    border: 1px solid var(--text-light);
 }
 
 @media screen and (min-width: 1280px) {
-	.wrapper {
-		max-width: 1200px;
-	}
+    .wrapper {
+        max-width: 1200px;
+    }
 }

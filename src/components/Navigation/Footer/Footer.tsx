@@ -5,6 +5,9 @@ import { Wrapper } from "../../Misc";
 const StyledFooter = styled.footer`
     background-color: var(--dark-bg);
     color: var(--text-light);
+    position: relative;
+    bottom: 0;
+    width: 100%;
 `;
 
 const StyledNavBar = styled(NavBar)`
