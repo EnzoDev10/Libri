@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { Button } from "../../index";
+import { Wrapper } from "../../Misc";
 
-const SearchbarWrapper = styled.article`
+const SearchbarWrapper = styled(Wrapper)`
     display: flex;
     position: relative;
-    background-color: var(--light-bg);
+    justify-content: end;
 `;
 
 const SearchInput = styled.input`
@@ -21,7 +22,7 @@ const SearchInput = styled.input`
 
 export const Searchbar = () => {
     return (
-        <SearchbarWrapper className='wrapper'>
+        <SearchbarWrapper>
             <SearchInput type='text' placeholder='H.P Lovecraft' />
             <Button Icon='search' parentMethod={() => {}} />
         </SearchbarWrapper>
