@@ -8,7 +8,9 @@ interface btnProps extends Partial<PropsWithChildren> {
     parentMethod?: () => void;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.attrs({
+    className: "hover",
+})`
     background-color: var(--accent-color);
     padding: 10px;
     border: none;
