@@ -1,16 +1,9 @@
 import { type PropsWithChildren } from "react";
-import styled from "styled-components";
-import { Search, ShoppingCart } from "lucide-react";
-
-interface btnProps extends Partial<PropsWithChildren> {
-    Icon?: "cart" | "search";
-    className?: string;
-    parentMethod?: () => void;
-}
+import { styled, css } from "styled-components";
 
 const StyledButton = styled.button.attrs({
     className: "hover",
-})`
+})<{ $destructive?: boolean }>`
     background-color: var(--accent-color);
     padding: 10px;
     border: none;
@@ -18,30 +11,40 @@ const StyledButton = styled.button.attrs({
     display: flex;
     gap: 15px;
     align-items: center;
-    color: inherit;
+    justify-content: center;
     font-weight: bold;
+    color: white;
+
+    &:hover {
+        background-color: var(--light-accent-color);
+    }
+
+    ${(props) =>
+        props.$destructive &&
+        css`
+            background-color: var(--destructive);
+            color: white;
+
+            &:hover {
+                background-color: var(--destructive-hover);
+            }
+        `};
 `;
 
-const IconWrapper = styled.span`
-    width: 1.2rem;
-    height: 1.2rem;
-    display: flex;
-    align-items: center;
-`;
+interface btnProps extends Partial<PropsWithChildren> {
+    className?: string;
+    parentMethod?: () => void;
+    destructive?: boolean;
+}
 
-export const Button = ({
-    children,
-    Icon,
-    className,
-    parentMethod,
-}: btnProps) => {
-    return (
-        <StyledButton className={className} onClick={parentMethod}>
-            {Icon == "cart" && (
-                <IconWrapper as={ShoppingCart} className='icon' />
-            )}
-            {Icon == "search" && <IconWrapper as={Search} className='icon' />}
-            {children}
-        </StyledButton>
-    );
+export const Button = ({ children, destructive, parentMethod }: btnProps) => {
+    if (destructive) {
+        return (
+            <StyledButton $destructive onClick={parentMethod}>
+                {children}
+            </StyledButton>
+        );
+    } else {
+        return <StyledButton onClick={parentMethod}>{children}</StyledButton>;
+    }
 };
