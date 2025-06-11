@@ -1,12 +1,13 @@
 :root {
     --dark-bg: #021526;
-    --light-bg: #d9d9d9;
+    --light-bg: #f3f4f6;
     --products-bg: #0c396f;
     --hero-bg: #27445d;
-    --delete-btn-bg: #b0041a;
-    --delete-btn-bg-hover: #500711;
+    --destructive: #b0041a;
+    --destructive-hover: #500711;
 
     --accent-color: #06396f;
+    --light-accent-color: #3b82f6;
     --text-dark: #222222;
     --text-light: #ffffff;
 
@@ -28,6 +29,13 @@
     box-sizing: border-box;
     font-family: var(--main-font), sans-serif;
     color: var(--text-light);
+    outline: none;
+    transition: outline 0s;
+    &:focus-visible {
+        outline: 2px solid var(--light-accent-color);
+        outline-offset: 2px;
+        border-radius: var(--radius-small);
+    }
 }
 
 html {

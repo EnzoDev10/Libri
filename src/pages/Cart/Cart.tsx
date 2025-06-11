@@ -60,7 +60,7 @@ export const Cart = () => {
                     <CheckoutSection>
                         <article>
                             <Button
-                                className='border delete-btn'
+                                destructive
                                 parentMethod={() => emptyCart()}
                             >
                                 Vaciar Carrito
