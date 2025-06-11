@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Button, Wrapper } from "../../index";
+import { Search } from "lucide-react";
 
 const SearchbarWrapper = styled(Wrapper)`
     display: flex;
@@ -23,7 +24,9 @@ export const Searchbar = () => {
     return (
         <SearchbarWrapper>
             <SearchInput type='text' placeholder='H.P Lovecraft' />
-            <Button Icon='search' parentMethod={() => {}} />
+            <Button parentMethod={() => {}}>
+                <Search />{" "}
+            </Button>
         </SearchbarWrapper>
     );
 };
