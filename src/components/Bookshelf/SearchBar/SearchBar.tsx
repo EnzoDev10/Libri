@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../index";
-import { Wrapper } from "../../Misc";
+import { Button, Wrapper } from "../../index";
 
 const SearchbarWrapper = styled(Wrapper)`
     display: flex;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Wrapper } from "../Misc";
+import { Wrapper } from "../index";
 
 const HeroSection = styled.section`
     background-color: var(--hero-bg);

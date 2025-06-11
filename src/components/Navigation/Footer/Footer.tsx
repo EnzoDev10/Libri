@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavBar } from "../NavBar/NavBar";
-import { Wrapper } from "../../Misc";
+import { Wrapper } from "../../index";
 
 const StyledFooter = styled.footer`
     background-color: var(--dark-bg);

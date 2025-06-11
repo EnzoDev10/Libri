@@ -1,5 +1,4 @@
-import { Header, Books, Button, Footer } from "../../components";
-import { Wrapper } from "../../components/Misc";
+import { Header, Books, Button, Footer, Wrapper } from "../../components";
 import { UseCart } from "../../context/contextIndex";
 import styled from "styled-components";
 
