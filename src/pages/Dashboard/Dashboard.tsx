@@ -1,6 +1,6 @@
-import { styled, css } from "styled-components";
 import { Wrapper, Header, Footer, Button } from "../../components";
 import { User, Key, LogOut } from "lucide-react";
+import { styled } from "styled-components";
 
 const StyledMain = styled.main`
     background-color: var(--products-bg);
@@ -74,12 +74,6 @@ const StyledButton = styled(Button)<{ $variant?: "destructive" }>`
     color: white;
     display: flex;
     justify-content: center;
-
-    ${(props) =>
-        props.$variant &&
-        css`
-            background-color: #dd0000;
-        `}
 `;
 
 export const Dashboard = () => {
@@ -111,7 +105,7 @@ export const Dashboard = () => {
                             <StyledButton>
                                 <Key size={16} /> Cambiar contraseña
                             </StyledButton>
-                            <StyledButton $variant='destructive'>
+                            <StyledButton destructive>
                                 <LogOut size={16} /> Cerrar Sesión
                             </StyledButton>
                         </CardContent>
