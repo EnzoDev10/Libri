@@ -1,28 +1,35 @@
-import type { Book } from '../../interfaces';
+import type { Book } from "../../interfaces";
 
-import { UseCart } from '../../context/CartContext';
+import { CartCard, CatalogCard } from "../index";
+import styled from "styled-components";
 
-import { Card } from '../index';
+const BooksContainer = styled.article`
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
 
 export const Books = (Props: {
-	arrayOfBooks: Book[] | [];
-	variant: 'bookshelf' | 'cart';
+    arrayOfBooks: Book[] | [];
+    variant: "bookshelf" | "cart";
 }) => {
-	const { addToCart, removeFromCart } = UseCart();
-	const action = Props.variant == 'bookshelf' ? addToCart : removeFromCart;
+    const CardComponent = Props.variant === "cart" ? CartCard : CatalogCard;
 
-	return (
-		<>
-			<article className='displayed-books'>
-				{Array.from({ length: Props.arrayOfBooks.length }).map((_, index) => (
-					<Card
-						book={Props.arrayOfBooks[index]}
-						variant={Props.variant}
-						action={action}
-						key={index}
-					/>
-				))}
-			</article>
-		</>
-	);
+    return (
+        <>
+            <BooksContainer className='displayed-books'>
+                {Array.from({ length: Props.arrayOfBooks.length }).map(
+                    (_, index) => (
+                        <CardComponent
+                            book={Props.arrayOfBooks[index]}
+                            key={index}
+                        />
+                    )
+                )}
+            </BooksContainer>
+        </>
+    );
 };
