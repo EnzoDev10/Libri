@@ -7,7 +7,8 @@ import styled from "styled-components";
 const StyledMain = styled.main`
     background-color: var(--products-bg);
     padding: 20px;
-    height: 100%;
+    min-height: 100%;
+    height: fit-content;
 `;
 
 const LoginContainer = styled(Wrapper)`

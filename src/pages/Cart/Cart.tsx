@@ -8,6 +8,7 @@ const CartMain = styled.main`
     align-items: stretch;
     background-color: var(--products-bg);
     padding: 30px;
+    min-height: 100%;
     height: fit-content;
     height: 100%;
 `;

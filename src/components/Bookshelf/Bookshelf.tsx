@@ -10,7 +10,6 @@ import { X } from "lucide-react";
 import type { Book } from "../../interfaces";
 import { UseProducts } from "../../context/productsContext";
 
-// Styled Components
 const Main = styled.main`
     background-color: var(--products-bg);
     padding: 20px;
