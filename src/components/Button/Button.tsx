@@ -1,12 +1,10 @@
 import { type PropsWithChildren } from "react";
+import { Link } from "react-router-dom";
 import { styled, css } from "styled-components";
 
-const StyledButton = styled.button.attrs({
-    className: "hover",
-})<{ $variant?: "transparent" | "destructive" }>`
-    background-color: var(--accent-color);
+const sharedStyles = `
+background-color: var(--accent-color);
     padding: 10px;
-    border: none;
     border: 1px solid transparent;
 
     border-radius: var(--radius-small);
@@ -20,6 +18,11 @@ const StyledButton = styled.button.attrs({
     &:hover {
         background-color: var(--light-accent-color);
     }
+`;
+
+const StyledLink = styled(Link)<{ $variant?: "transparent" | "destructive" }>`
+    ${sharedStyles}
+    border-color: var(--text-light);
 
     ${(props) =>
         props.$variant == "destructive" &&
@@ -31,6 +34,36 @@ const StyledButton = styled.button.attrs({
                 background-color: var(--destructive-hover);
             }
         `};
+
+    ${(props) =>
+        props.$variant == "transparent" &&
+        css`
+            background-color: transparent;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+
+            &:hover {
+                background-color: var(--light-accent-color);
+            }
+        `};
+`;
+
+const StyledButton = styled.button.attrs({
+    className: "hover",
+})<{ $variant?: "destructive" | "transparent" }>`
+    ${sharedStyles}
+
+    ${(props) =>
+        props.$variant == "destructive" &&
+        css`
+            background-color: var(--destructive);
+            color: white;
+
+            &:hover {
+                background-color: var(--destructive-hover);
+            }
+        `};
+
     ${(props) =>
         props.$variant == "transparent" &&
         css`
@@ -48,9 +81,17 @@ interface btnProps extends Partial<PropsWithChildren> {
     className?: string;
     parentMethod?: () => void;
     variant?: "transparent" | "destructive";
+    to?: string;
 }
 
-export const Button = ({ children, variant, parentMethod }: btnProps) => {
+export const Button = ({ children, variant, to, parentMethod }: btnProps) => {
+    if (to) {
+        return (
+            <StyledLink to={to} $variant={variant}>
+                {children}
+            </StyledLink>
+        );
+    }
     return (
         <StyledButton $variant={variant} onClick={parentMethod}>
             {children}

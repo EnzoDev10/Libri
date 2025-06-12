@@ -27,13 +27,14 @@ export const NavBar = ({ variant, className }: Prop) => {
                     </Link>
                 </li>
                 <li>
-                    <Link to='/carrito' tabIndex={-1}>
-                        <Button className='border' parentMethod={() => {}}>
-                            <ShoppingCart />
+                    <Button
+                        to='/carrito'
+                        parentMethod={() => {}}
+                    >
+                        <ShoppingCart />
 
-                            {cartContent.length}
-                        </Button>
-                    </Link>
+                        {cartContent.length}
+                    </Button>
                 </li>
             </ul>
         </nav>

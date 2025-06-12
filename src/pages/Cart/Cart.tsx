@@ -9,6 +9,7 @@ const CartMain = styled.main`
     background-color: var(--products-bg);
     padding: 30px;
     height: fit-content;
+    height: 100%;
 `;
 
 const CartWrapper = styled(Wrapper)`
@@ -33,6 +34,7 @@ const Container = styled.div`
 const CartCard = styled.div`
     background: var(--light-bg);
     border-radius: var(--radius-large);
+
     padding: 40px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 
@@ -103,6 +105,15 @@ const CartActions = styled.div`
     }
     @media (max-width: 480px) {
         gap: 16px;
+    }
+`;
+
+const EmptyCartActions = styled.div`
+    display: grid;
+    grid-template-columns: 1fr;
+
+    a {
+        padding: 10px 50px;
     }
 `;
 
@@ -207,6 +218,7 @@ const handleCheckout = (): void => {
     }
 };
 */
+
 export const CartContent = () => {
     const content = UseCart();
 
@@ -216,9 +228,11 @@ export const CartContent = () => {
                 <CartCard>
                     <CartTitle>Tu Carrito</CartTitle>
                     <CartSubtitle>Tu carrito esta vacio</CartSubtitle>
-                    <CartActions>
-                        <CheckoutBtn>Continuar comprando</CheckoutBtn>
-                    </CartActions>
+                    <EmptyCartActions>
+                        <ContinueShoppingBtn to='/' variant='transparent'>
+                            Volver al catalogo
+                        </ContinueShoppingBtn>
+                    </EmptyCartActions>
                 </CartCard>
             </Container>
         );
@@ -248,9 +262,10 @@ export const CartContent = () => {
                 </CartSummary>
 
                 <CartActions>
-                    <ContinueShoppingBtn variant='transparent'>
+                    <ContinueShoppingBtn to='/' variant='transparent'>
                         Volver al catalogo
                     </ContinueShoppingBtn>
+
                     <CheckoutBtn>Comprar</CheckoutBtn>
                 </CartActions>
             </CartCard>
