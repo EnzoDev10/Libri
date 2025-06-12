@@ -3,10 +3,12 @@ import { styled, css } from "styled-components";
 
 const StyledButton = styled.button.attrs({
     className: "hover",
-})<{ $destructive?: boolean }>`
+})<{ $variant?: "transparent" | "destructive" }>`
     background-color: var(--accent-color);
     padding: 10px;
     border: none;
+    border: 1px solid transparent;
+
     border-radius: var(--radius-small);
     display: flex;
     gap: 15px;
@@ -20,7 +22,7 @@ const StyledButton = styled.button.attrs({
     }
 
     ${(props) =>
-        props.$destructive &&
+        props.$variant == "destructive" &&
         css`
             background-color: var(--destructive);
             color: white;
@@ -29,22 +31,29 @@ const StyledButton = styled.button.attrs({
                 background-color: var(--destructive-hover);
             }
         `};
+    ${(props) =>
+        props.$variant == "transparent" &&
+        css`
+            background-color: transparent;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+
+            &:hover {
+                background-color: var(--light-accent-color);
+            }
+        `};
 `;
 
 interface btnProps extends Partial<PropsWithChildren> {
     className?: string;
     parentMethod?: () => void;
-    destructive?: boolean;
+    variant?: "transparent" | "destructive";
 }
 
-export const Button = ({ children, destructive, parentMethod }: btnProps) => {
-    if (destructive) {
-        return (
-            <StyledButton $destructive onClick={parentMethod}>
-                {children}
-            </StyledButton>
-        );
-    } else {
-        return <StyledButton onClick={parentMethod}>{children}</StyledButton>;
-    }
+export const Button = ({ children, variant, parentMethod }: btnProps) => {
+    return (
+        <StyledButton $variant={variant} onClick={parentMethod}>
+            {children}
+        </StyledButton>
+    );
 };
