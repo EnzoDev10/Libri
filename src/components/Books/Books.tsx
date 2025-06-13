@@ -20,7 +20,7 @@ export const Books = (Props: {
 
     return (
         <>
-            <BooksContainer className='displayed-books'>
+            <BooksContainer>
                 {Array.from({ length: Props.arrayOfBooks.length }).map(
                     (_, index) => (
                         <CardComponent

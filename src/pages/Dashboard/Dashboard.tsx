@@ -76,6 +76,10 @@ const StyledButton = styled(Button)<{ $variant?: "destructive" }>`
     justify-content: center;
 `;
 
+const StyledHeading = styled.h1`
+font-size: 2rem;
+`;
+
 export const Dashboard = () => {
     // Dummy data for visual representation
     const username = "José José";
@@ -89,7 +93,7 @@ export const Dashboard = () => {
 
             <StyledMain>
                 <StyledWrapper>
-                    <h1>Dashboard</h1>
+                    <StyledHeading>Dashboard</StyledHeading>
                     <Card>
                         <CardHeader>
                             <AvatarPlaceholder>
@@ -105,7 +109,7 @@ export const Dashboard = () => {
                             <StyledButton>
                                 <Key size={16} /> Cambiar contraseña
                             </StyledButton>
-                            <StyledButton destructive>
+                            <StyledButton variant='destructive'>
                                 <LogOut size={16} /> Cerrar Sesión
                             </StyledButton>
                         </CardContent>
