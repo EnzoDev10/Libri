@@ -8,6 +8,8 @@ import {
     AuthProvider,
 } from "./context/contextIndex";
 
+import { Toaster } from "react-hot-toast";
+
 function App() {
     return (
         <>
@@ -35,6 +37,7 @@ function App() {
                                 }
                             ></Route>
                         </Routes>
+                        <Toaster />
                     </CartContextProvider>
                 </ProductsContextProvider>
             </AuthProvider>

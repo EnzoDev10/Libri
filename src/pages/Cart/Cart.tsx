@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import type { Book } from "../../interfaces";
 import { formatPrice } from "../../helpers";
+import toast from "react-hot-toast";
 
 const CartMain = styled.main`
     display: flex;
@@ -170,7 +171,7 @@ interface CartSummary {
 export const CartContent = () => {
     const [summary, setSummary] = useState<CartSummary>({
         subtotal: 0,
-        shipping: 5.000,
+        shipping: 5000,
         total: 0,
     });
     const { cartContent } = UseCart();
@@ -223,7 +224,15 @@ export const CartContent = () => {
                         Volver al catalogo
                     </ContinueShoppingBtn>
 
-                    <CheckoutBtn>Comprar</CheckoutBtn>
+                    <CheckoutBtn
+                        parentMethod={() =>
+                            toast.success("Compra realizada", {
+                                position: "bottom-right",
+                            })
+                        }
+                    >
+                        Comprar
+                    </CheckoutBtn>
                 </CartActions>
             </CartCard>
         </Container>
