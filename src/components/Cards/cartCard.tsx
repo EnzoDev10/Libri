@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Button } from "../index";
 import type { Book } from "../../interfaces";
 import Cover from "./cover-placeholder.png";
+import { UseCart } from "../../context/CartContext";
+import { formatPrice } from '../../helpers';
 
 const CartItemDiv = styled.div`
     display: flex;
@@ -169,19 +171,21 @@ const RemoveBtn = styled(Button)`
 `;
 
 export const CartCard = ({ book }: { book: Book }) => {
+    const { removeFromCart, updateQuantity } = UseCart();
+
     const imageUrl = book.coverId
         ? `https://Covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
         : Cover;
     return (
         <CartItemDiv>
             <ItemImage>
-                <img src={imageUrl} alt={`${book.title} cover`} />
+                <img height={110} width={70} src={imageUrl} alt={`${book.title} cover`} />
             </ItemImage>
 
             <ItemDetails>
                 <ItemHeader>
                     <ItemTitle>{book.title}</ItemTitle>
-                    <Price>{book.price}</Price>
+                    <Price>{formatPrice(book.price)}</Price>
                 </ItemHeader>
                 <ItemAuthor>{book.author}</ItemAuthor>
                 <ItemControls>
@@ -189,14 +193,15 @@ export const CartCard = ({ book }: { book: Book }) => {
                         <QuantityBtn
                             variant='transparent'
                             aria-label='Decrease quantity'
+                            parentMethod={() => updateQuantity(book.id, -1)}
                         >
                             -
                         </QuantityBtn>
-                        {/* ! update book type to allows quantities */}
-                        <Quantity>0</Quantity>
+                        <Quantity>{book.quantity}</Quantity>
                         <QuantityBtn
                             variant='transparent'
                             aria-label='Increase quantity'
+                            parentMethod={() => updateQuantity(book.id, +1)}
                         >
                             +
                         </QuantityBtn>
@@ -204,6 +209,7 @@ export const CartCard = ({ book }: { book: Book }) => {
                     <RemoveBtn
                         variant='destructive'
                         aria-label={`Remove ${book.title} from cart`}
+                        parentMethod={() => removeFromCart(book)}
                     >
                         ×
                     </RemoveBtn>

@@ -4,6 +4,7 @@ import type { Book } from "../../interfaces";
 import Cover from "./cover-placeholder.png";
 import { useExtractColors } from "react-extract-colors";
 import { UseCart } from "../../context/CartContext";
+import { formatPrice } from "../../helpers";
 
 // Styled-components based on card.css
 const CardArticle = styled.article`
@@ -19,7 +20,7 @@ const CardArticle = styled.article`
     background-color: #abb;
 `;
 
-const CardP = styled.p`
+const CardParagraph = styled.p`
     color: var(--text-dark);
 `;
 
@@ -97,10 +98,14 @@ export const CatalogCard = ({ book }: { book: Book }) => {
             <BookInfo>
                 <div className='title-container'>
                     <Title title={book.title}>{book.title}</Title>
-                    <CardP className='author'>{book.author}</CardP>
+                    <CardParagraph className='author'>
+                        {book.author}
+                    </CardParagraph>
                 </div>
                 <BookBuy>
-                    <CardP className='price'>${book.price}</CardP>
+                    <CardParagraph className='price'>
+                        {formatPrice(book.price)}
+                    </CardParagraph>
                     <Button parentMethod={() => addToCart(book)}>
                         Agregar
                     </Button>
