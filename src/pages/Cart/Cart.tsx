@@ -1,6 +1,10 @@
+import { useState, useEffect } from "react";
 import { Header, Footer, Wrapper, Button, Books } from "../../components";
 import { UseCart } from "../../context/contextIndex";
 import styled from "styled-components";
+
+import type { Book } from "../../interfaces";
+import { formatPrice } from "../../helpers";
 
 const CartMain = styled.main`
     display: flex;
@@ -10,7 +14,6 @@ const CartMain = styled.main`
     padding: 30px;
     min-height: 100%;
     height: fit-content;
-    height: 100%;
 `;
 
 const CartWrapper = styled(Wrapper)`
@@ -74,7 +77,7 @@ const CartSummary = styled.div`
     margin-bottom: 24px;
 `;
 
-const SummaryRow = styled.div<{ total?: boolean }>`
+const SummaryRow = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
@@ -83,17 +86,15 @@ const SummaryRow = styled.div<{ total?: boolean }>`
     * {
         color: var(--text-dark);
     }
+`;
 
-    ${({ total }) =>
-        total &&
-        `
-        font-size: 18px;
-        font-weight: 600;
-        color: #1f2937;
-        border-top: 1px solid #e5e7eb;
-        padding-top: 8px;
-        margin-top: 8px;
-    `}
+const SummaryRowTotal = styled(SummaryRow)`
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 8px;
+    margin-top: 8px;
 `;
 
 const CartActions = styled.div`
@@ -150,80 +151,35 @@ const CheckoutBtn = styled(Button)`
     }
 `;
 
-/* interface CartProps {
-    onContinueShopping?: () => void;
-    onCheckout?: () => void;
-}
- */
-
-/*     const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
- */ /* 
-! Mover toda esta logica para el CartContext
-*/
-/*     const [summary, setSummary] = useState<CartSummary>({
-    subtotal: 0,
-    shipping: 5000,
-    total: 0,
-});
-
-const formatPrice = (price: number): string => {
-    return `$${price.toLocaleString("en-US")}`;
-};
-
-const calculateSummary = (items: CartItem[]): CartSummary => {
-    const subtotal = items.reduce(
+const calculateSummary = (cartContent: Book[]): CartSummary => {
+    const subtotal = cartContent.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
-    const shipping = items.length > 0 ? 5000 : 0;
+    const shipping = 5000;
     const total = subtotal + shipping;
-
     return { subtotal, shipping, total };
 };
 
-useEffect(() => {
-    setSummary(calculateSummary(cartItems));
-}, [cartItems]);
-
-const updateQuantity = (itemId: number, change: number): void => {
-    setCartItems((prevItems) =>
-        prevItems.map((item) => {
-            if (item.id === itemId) {
-                const newQuantity = Math.max(1, item.quantity + change);
-                return { ...item, quantity: newQuantity };
-            }
-            return item;
-        })
-    );
-};
-
-const removeItem = (itemId: number): void => {
-    setCartItems((prevItems) =>
-        prevItems.filter((item) => item.id !== itemId)
-    );
-};
-
-const handleContinueShopping = (): void => {
-    if (onContinueShopping) {
-        onContinueShopping();
-    } else {
-        alert("Continuing shopping...");
-    }
-};
-
-const handleCheckout = (): void => {
-    if (onCheckout) {
-        onCheckout();
-    } else {
-        alert("Proceeding to checkout...");
-    }
-};
-*/
+interface CartSummary {
+    subtotal: number;
+    shipping: number;
+    total: number;
+}
 
 export const CartContent = () => {
-    const content = UseCart();
+    const [summary, setSummary] = useState<CartSummary>({
+        subtotal: 0,
+        shipping: 5.000,
+        total: 0,
+    });
+    const { cartContent } = UseCart();
 
-    if (content.cartContent.length === 0) {
+    useEffect(() => {
+        setSummary(calculateSummary(cartContent));
+    }, [cartContent]);
+
+    if (cartContent.length === 0) {
         return (
             <Container>
                 <CartCard>
@@ -246,20 +202,20 @@ export const CartContent = () => {
                 <CartSubtitle>
                     Revisa tu lista de productos antes de comprarlos
                 </CartSubtitle>
-                <Books variant='cart' arrayOfBooks={content.cartContent} />
+                <Books variant='cart' arrayOfBooks={cartContent} />
                 <CartSummary>
                     <SummaryRow>
                         <span>Subtotal:</span>
-                        <span>$99.999</span>
+                        <span>{formatPrice(summary.subtotal)}</span>
                     </SummaryRow>
                     <SummaryRow>
                         <span>Envio:</span>
-                        <span>$99.999</span>
+                        <span>{formatPrice(summary.shipping)}</span>
                     </SummaryRow>
-                    <SummaryRow total>
+                    <SummaryRowTotal>
                         <span>Total:</span>
-                        <span>$99.999</span>
-                    </SummaryRow>
+                        <span>{formatPrice(summary.total)}</span>
+                    </SummaryRowTotal>
                 </CartSummary>
 
                 <CartActions>
@@ -275,8 +231,6 @@ export const CartContent = () => {
 };
 
 export const Cart = () => {
-    /*     const { cartContent, emptyCart } = UseCart();
-     */
     return (
         <>
             <Header />
