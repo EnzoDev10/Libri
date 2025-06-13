@@ -5,6 +5,7 @@ import Cover from "./cover-placeholder.png";
 import { useExtractColors } from "react-extract-colors";
 import { UseCart } from "../../context/CartContext";
 import { formatPrice } from "../../helpers";
+import toast from "react-hot-toast";
 
 // Styled-components based on card.css
 const CardArticle = styled.article`
@@ -106,7 +107,14 @@ export const CatalogCard = ({ book }: { book: Book }) => {
                     <CardParagraph className='price'>
                         {formatPrice(book.price)}
                     </CardParagraph>
-                    <Button parentMethod={() => addToCart(book)}>
+                    <Button
+                        parentMethod={() => {
+                            addToCart(book);
+                            toast.success("Producto agregado al carrito.", {
+                                position: "bottom-right",
+                            });
+                        }}
+                    >
                         Agregar
                     </Button>
                 </BookBuy>

@@ -3,7 +3,8 @@ import { Button } from "../index";
 import type { Book } from "../../interfaces";
 import Cover from "./cover-placeholder.png";
 import { UseCart } from "../../context/CartContext";
-import { formatPrice } from '../../helpers';
+import { formatPrice } from "../../helpers";
+import toast from "react-hot-toast";
 
 const CartItemDiv = styled.div`
     display: flex;
@@ -179,7 +180,12 @@ export const CartCard = ({ book }: { book: Book }) => {
     return (
         <CartItemDiv>
             <ItemImage>
-                <img height={110} width={70} src={imageUrl} alt={`${book.title} cover`} />
+                <img
+                    height={110}
+                    width={70}
+                    src={imageUrl}
+                    alt={`${book.title} cover`}
+                />
             </ItemImage>
 
             <ItemDetails>
@@ -209,7 +215,13 @@ export const CartCard = ({ book }: { book: Book }) => {
                     <RemoveBtn
                         variant='destructive'
                         aria-label={`Remove ${book.title} from cart`}
-                        parentMethod={() => removeFromCart(book)}
+                        parentMethod={() => {
+                            removeFromCart(book);
+                            toast("Producto eliminado del carrito.", {
+                                position: "bottom-right",
+                                icon: "🗑️",
+                            });
+                        }}
                     >
                         ×
                     </RemoveBtn>
