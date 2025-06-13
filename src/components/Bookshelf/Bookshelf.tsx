@@ -58,14 +58,6 @@ const Error = styled.div`
     }
 `;
 
-function randomPrice() {
-    const max = 50000;
-    const min = 12000;
-    const ranNum = randomInt(min, max);
-
-    return Number(Intl.NumberFormat("es-AR").format(ranNum));
-}
-
 export const Bookshelf = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [errorExist, setErrorExist] = useState(false);
@@ -90,7 +82,8 @@ export const Bookshelf = () => {
                                 title: firstTen[i].title,
                                 author: firstTen[i].author_name[0],
                                 coverId: firstTen[i].cover_i,
-                                price: randomPrice(),
+                                price: randomInt(),
+                                quantity: 1,
                             };
                             arr.push(obj);
                         }
