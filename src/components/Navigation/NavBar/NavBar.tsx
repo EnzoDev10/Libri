@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "../../index";
 import { UseCart } from "../../../context/CartContext";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, User2 } from "lucide-react";
 interface Prop {
     className: string;
     variant: "header" | "footer";
@@ -17,20 +17,16 @@ export const NavBar = ({ variant, className }: Prop) => {
             <ul>
                 <li>
                     <Link to='/' className='hover'>
-                        Inicio
-                    </Link>
-                </li>
-
-                <li>
-                    <Link to='/' className='hover'>
-                        Contacto
+                        Catalogo
                     </Link>
                 </li>
                 <li>
-                    <Button
-                        to='/carrito'
-                        parentMethod={() => {}}
-                    >
+                    <Button to='/dashboard'>
+                        <User2 />
+                    </Button>
+                </li>
+                <li>
+                    <Button to='/carrito'>
                         <ShoppingCart />
 
                         {cartContent.length}
