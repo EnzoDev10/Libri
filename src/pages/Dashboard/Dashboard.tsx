@@ -1,6 +1,9 @@
 import { Wrapper, Header, Footer, Button } from "../../components";
-import { User, Key, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { styled } from "styled-components";
+import { useAuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const StyledMain = styled.main`
     background-color: var(--products-bg);
@@ -77,15 +80,32 @@ const StyledButton = styled(Button)<{ $variant?: "destructive" }>`
 `;
 
 const StyledHeading = styled.h1`
-font-size: 2rem;
+    font-size: 30px;
+    font-weight: 600;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 30px;
+
+    @media (max-width: 480px) {
+        font-size: 24px;
+    }
 `;
 
 export const Dashboard = () => {
     // Dummy data for visual representation
-    const username = "José José";
+    const username = "usuario";
     const password = "••••••••";
     const avatarInitial = username.charAt(0).toUpperCase();
-    // No actual functionality needed as per request, just visual placeholders
+    const context = useAuthContext();
+    const Navigate = useNavigate();
+
+    function closeSession() {
+        context?.logout();
+        Navigate("/");
+        toast.success("sesion cerrada con exito.", {
+            position: "bottom-right",
+        });
+    }
 
     return (
         <>
@@ -93,8 +113,8 @@ export const Dashboard = () => {
 
             <StyledMain>
                 <StyledWrapper>
-                    <StyledHeading>Dashboard</StyledHeading>
                     <Card>
+                        <StyledHeading>Dashboard</StyledHeading>
                         <CardHeader>
                             <AvatarPlaceholder>
                                 {avatarInitial}
@@ -103,13 +123,10 @@ export const Dashboard = () => {
                             <PasswordText>{password}</PasswordText>
                         </CardHeader>
                         <CardContent>
-                            <StyledButton>
-                                <User size={16} /> Cambiar nombre de usuario
-                            </StyledButton>
-                            <StyledButton>
-                                <Key size={16} /> Cambiar contraseña
-                            </StyledButton>
-                            <StyledButton variant='destructive'>
+                            <StyledButton
+                                variant='destructive'
+                                parentMethod={() => closeSession()}
+                            >
                                 <LogOut size={16} /> Cerrar Sesión
                             </StyledButton>
                         </CardContent>

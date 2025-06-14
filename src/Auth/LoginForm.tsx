@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/contextIndex";
 import { Footer, Header, Button, Wrapper } from "../components";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 const StyledMain = styled.main`
     background-color: var(--products-bg);
@@ -107,10 +108,12 @@ const CheckboxLabel = styled.span`
     color: #4b5563;
 `;
 
-const ForgotPassword = styled.a`
+const ForgotPassword = styled.button`
     color: #3b82f6;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
+    border: none;
+    background-color: transparent;
 
     &:hover {
         color: #1d4ed8;
@@ -137,7 +140,7 @@ const SubmitButton = styled(Button)`
 `;
 
 export const LoginForm = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const authContext = useAuthContext();
     const navigate = useNavigate();
@@ -145,11 +148,16 @@ export const LoginForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Authentication simulation
-        if (username === "admin" && password === "1234") {
-            authContext?.login(username);
+        if (email === "adminLocal@gmail.com" && password === "1234") {
+            authContext?.login(email);
+            toast.success("Bienvenido, admin.", { position: "bottom-right" });
             navigate("/dashboard");
         } else {
-            alert("Incorrect credentials");
+            authContext?.login(email);
+            navigate("/dashboard");
+            toast.success("Cuenta creada con exito.", {
+                position: "bottom-right",
+            });
         }
     };
 
@@ -165,18 +173,18 @@ export const LoginForm = () => {
                                 Crea una cuenta para continuar{" "}
                             </FormSubtitle>
                         </FormHeader>
-                        <Form className='form' onSubmit={handleSubmit}>
+                        <Form
+                            className='form'
+                            id='loginForm'
+                            onSubmit={handleSubmit}
+                        >
                             <FormGroup>
-                                <FormLabel htmlFor='username'>
-                                    Nombre de Usuario
-                                </FormLabel>
+                                <FormLabel htmlFor='email'>Correo</FormLabel>
                                 <FormInput
-                                    type='text'
-                                    id='username'
-                                    value={username}
-                                    onChange={(e) =>
-                                        setUsername(e.target.value)
-                                    }
+                                    type='email'
+                                    id='email'
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     placeholder='ej. José José'
                                 />
                             </FormGroup>
@@ -199,7 +207,18 @@ export const LoginForm = () => {
                                     <Checkbox type='checkbox' />
                                     <CheckboxLabel>Recuerdame</CheckboxLabel>
                                 </CheckboxWrapper>
-                                <ForgotPassword href='#'>
+                                <ForgotPassword
+                                    type='button'
+                                    onClick={() =>
+                                        toast.error(
+                                            "mala suerte, esta función no fue implementada.",
+                                            {
+                                                position: "bottom-right",
+                                                icon: "🤷",
+                                            }
+                                        )
+                                    }
+                                >
                                     Olvidaste tu contraseña?
                                 </ForgotPassword>
                             </FormOptions>
