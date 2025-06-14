@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from "react";
 
 import type { Book } from "../interfaces";
 import type { PropsWithChildren } from "react";
-import { randomInt } from "../helpers";
 interface CartProps {
     cartContent: [] | Book[];
     addToCart: (product: Book) => void;
@@ -24,24 +23,15 @@ export const UseCart = () => {
     return content;
 };
 
-function bookIdGenerator(title: string, author: string) {
-    const ranNum = randomInt();
-    return `${title}-${author}-${ranNum}`;
-}
-
 export const CartContextProvider = ({ children }: PropsWithChildren) => {
     const [cartContent, setCartContent] = useState<Book[] | []>([]);
 
-    const addToCart = (producto: Book) => {
-        if (producto.id) {
-            const clone: Book = (function ({ ...producto }) {
-                producto.id = bookIdGenerator(producto.title, producto.author);
-                return producto;
-            })(producto);
-            setCartContent([...cartContent, clone]);
+    const addToCart = (bookToAdd: Book) => {
+        const book = cartContent.find((book) => book.id === bookToAdd.id);
+        if (book) {
+            updateQuantity(book.id, +1);
         } else {
-            producto.id = bookIdGenerator(producto.title, producto.author);
-            setCartContent([...cartContent, producto]);
+            setCartContent([...cartContent, bookToAdd]);
         }
     };
 

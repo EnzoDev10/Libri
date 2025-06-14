@@ -82,6 +82,8 @@ export const Bookshelf = () => {
                                 title: firstTen[i].title,
                                 author: firstTen[i].author_name[0],
                                 coverId: firstTen[i].cover_i,
+                                id: `${firstTen[i].title}-
+                                    ${firstTen[i].author_name[0]}-${i}`,
                                 price: randomInt(),
                                 quantity: 1,
                             };
