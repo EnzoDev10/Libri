@@ -188,7 +188,7 @@ export const CartContent = () => {
                     <CartSubtitle>Tu carrito esta vacio</CartSubtitle>
                     <EmptyCartActions>
                         <ContinueShoppingBtn to='/' variant='transparent'>
-                            Volver al catalogo
+                            Volver al catálogo
                         </ContinueShoppingBtn>
                     </EmptyCartActions>
                 </CartCard>

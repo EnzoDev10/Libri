@@ -17,7 +17,7 @@ export const NavBar = ({ variant, className }: Prop) => {
             <ul>
                 <li>
                     <Link to='/' className='hover'>
-                        Catalogo
+                        Catálogo
                     </Link>
                 </li>
                 <li>
