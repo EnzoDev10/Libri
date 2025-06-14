@@ -174,7 +174,7 @@ export const CartContent = () => {
         shipping: 5000,
         total: 0,
     });
-    const { cartContent } = UseCart();
+    const { cartContent, emptyCart } = UseCart();
 
     useEffect(() => {
         setSummary(calculateSummary(cartContent));
@@ -220,13 +220,22 @@ export const CartContent = () => {
                 </CartSummary>
 
                 <CartActions>
-                    <ContinueShoppingBtn to='/' variant='transparent'>
-                        Volver al catalogo
-                    </ContinueShoppingBtn>
+                    <Button
+                        variant='destructive'
+                        parentMethod={() => {
+                            emptyCart();
+                            toast("Carrito Vaciado.", {
+                                position: "bottom-right",
+                                icon: "🗑️",
+                            });
+                        }}
+                    >
+                        vaciar carrito
+                    </Button>
 
                     <CheckoutBtn
                         parentMethod={() =>
-                            toast.success("Compra realizada", {
+                            toast.success("Compra realizada.", {
                                 position: "bottom-right",
                             })
                         }
