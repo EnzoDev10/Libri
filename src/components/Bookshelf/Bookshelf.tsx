@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { randomInt } from "../../helpers";
-import { Categories } from "./Categories/Categories";
 import { Searchbar } from "./SearchBar/SearchBar";
 import { X } from "lucide-react";
 
@@ -34,6 +33,15 @@ const BookNav = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 40px;
+
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+
+        article {
+            width: fit-content;
+        }
+    }
 `;
 
 const Data = styled.article`
@@ -61,7 +69,6 @@ const Error = styled.div`
 export const Bookshelf = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [errorExist, setErrorExist] = useState(false);
-    const [currentCategory, setCurrentCategory] = useState("subject=argentina");
 
     const { productsContent, setProductsContent, needToFetch, setNeedToFetch } =
         UseProducts();
@@ -71,7 +78,7 @@ export const Bookshelf = () => {
             setIsLoading(false);
             return;
         }
-        fetch(`https://openlibrary.org/search.json?${currentCategory}`)
+        fetch(`https://openlibrary.org/search.json?author=lovecraft`)
             .then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
@@ -107,24 +114,14 @@ export const Bookshelf = () => {
                 setIsLoading(false);
                 setErrorExist(true);
             });
-    }, [setProductsContent, needToFetch, setNeedToFetch, currentCategory]);
-
-    function changeCategories() {
-        setNeedToFetch(true);
-        setIsLoading(true);
-    }
+    }, [setProductsContent, needToFetch, setNeedToFetch]);
 
     return (
         <Main>
             <div className='wrapper'>
                 <Section>
-                    <Heading>Productos</Heading>
                     <BookNav>
-                        <Categories
-                            toReset={changeCategories}
-                            onCategoryChange={setCurrentCategory}
-                            value={currentCategory}
-                        />
+                        <Heading>Productos</Heading>
                         <Searchbar />
                     </BookNav>
                     <Data>
