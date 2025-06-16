@@ -6,6 +6,10 @@ const SearchbarWrapper = styled(Wrapper)`
     display: flex;
     position: relative;
     justify-content: end;
+    height: 37px;
+    padding: 0 20px;
+
+
 `;
 
 const SearchInput = styled.input`
