@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { randomInt } from "../../helpers";
 import { Categories } from "./Categories/Categories";
 import { Searchbar } from "./SearchBar/SearchBar";
-import { Books } from "../index";
 import { X } from "lucide-react";
 
 import type { Book } from "../../interfaces";
 import { UseProducts } from "../../context/productsContext";
+import { PaginatedItems } from "./Pagination/Pagination";
 
 const Main = styled.main`
     background-color: var(--products-bg);
@@ -61,38 +61,42 @@ const Error = styled.div`
 export const Bookshelf = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [errorExist, setErrorExist] = useState(false);
-    const [bookshelfBooks, setBookshelfBooks] = useState<Book[] | null>();
+    const [currentCategory, setCurrentCategory] = useState("subject=argentina");
+
     const { productsContent, setProductsContent, needToFetch, setNeedToFetch } =
         UseProducts();
 
     useEffect(() => {
         if (needToFetch == false) {
-            setBookshelfBooks(productsContent);
             setIsLoading(false);
             return;
         }
-        fetch("https://openlibrary.org/search.json?author=lovecraft")
+        fetch(`https://openlibrary.org/search.json?${currentCategory}`)
             .then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
-                        const firstTen = data.docs.slice(0, 10);
-                        const arr: Book[] = [];
-                        for (let i = 0; i < firstTen.length; i++) {
-                            const obj: Book = {
-                                title: firstTen[i].title,
-                                author: firstTen[i].author_name[0],
-                                coverId: firstTen[i].cover_i,
-                                id: `${firstTen[i].title}-
-                                    ${firstTen[i].author_name[0]}-${i}`,
-                                price: randomInt(),
-                                quantity: 1,
-                            };
-                            arr.push(obj);
+                        const booksList = data.docs;
+                        if (booksList.length > 0) {
+                            const arr: Book[] = [];
+                            for (let i = 0; i < booksList.length; i++) {
+                                const obj: Book = {
+                                    title: booksList[i].title,
+                                    author: booksList[i].author_name[0],
+                                    coverId: booksList[i].cover_i,
+                                    id: `${booksList[i].title}-
+                                        ${booksList[i].author_name[0]}-${i}`,
+                                    price: randomInt(),
+                                    quantity: 1,
+                                };
+                                arr.push(obj);
+                            }
+                            setProductsContent(arr);
+                            setNeedToFetch(false);
+                            setIsLoading(false);
+                        } else {
+                            setIsLoading(false);
+                            setErrorExist(true);
                         }
-                        setProductsContent(arr);
-                        setBookshelfBooks(arr);
-                        setNeedToFetch(false);
-                        setIsLoading(false);
                     });
                 }
             })
@@ -103,7 +107,12 @@ export const Bookshelf = () => {
                 setIsLoading(false);
                 setErrorExist(true);
             });
-    }, [setProductsContent, needToFetch, setNeedToFetch, productsContent]);
+    }, [setProductsContent, needToFetch, setNeedToFetch, currentCategory]);
+
+    function changeCategories() {
+        setNeedToFetch(true);
+        setIsLoading(true);
+    }
 
     return (
         <Main>
@@ -111,7 +120,11 @@ export const Bookshelf = () => {
                 <Section>
                     <Heading>Productos</Heading>
                     <BookNav>
-                        <Categories />
+                        <Categories
+                            toReset={changeCategories}
+                            onCategoryChange={setCurrentCategory}
+                            value={currentCategory}
+                        />
                         <Searchbar />
                     </BookNav>
                     <Data>
@@ -122,11 +135,8 @@ export const Bookshelf = () => {
                                 <p>Ocurrió un error.</p>
                             </Error>
                         )}
-                        {!errorExist && !isLoading && bookshelfBooks && (
-                            <Books
-                                arrayOfBooks={bookshelfBooks}
-                                variant='bookshelf'
-                            />
+                        {!errorExist && !isLoading && productsContent && (
+                            <PaginatedItems products={productsContent} />
                         )}
                     </Data>
                 </Section>

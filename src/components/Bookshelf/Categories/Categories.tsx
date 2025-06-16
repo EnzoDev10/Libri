@@ -1,68 +1,53 @@
 import styled from "styled-components";
 
-const CategoriesList = styled.ul`
-    display: flex;
-    gap: 5px;
-    position: relative;
-`;
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+import { Wrapper } from "../../Misc";
 
-const CategoryItem = styled.li`
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-`;
+const optionsSearch = [
+    { label: "recomendaciones", value: "subject=argentina" },
+    { label: "Terror Cosmico", value: "author=lovecraft" },
+    { label: "Romance", value: "subject=romance" },
+    { label: "ficción", value: "subject=fiction" },
+    { label: "autoayuda", value: "subject=selfhelp" },
+];
 
-const CategoryInput = styled.input`
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-
-    &:hover ~ label {
-        background-color: color-mix(
-            in srgb,
-            var(--accent-color),
-            transparent 20%
-        );
-        color: var(--text-light);
-    }
-
-    &:focus-visible ~ label {
-        outline: 2px solid red;
-    }
-
-    &:checked ~ label {
+const StyledWrapper = styled(Wrapper)`
+    .Dropdown-control {
+        border-radius: var(--radius-small);
         background-color: var(--accent-color);
-        color: var(--text-light);
+    }
+    .Dropdown-root {
+        max-width: 150px;
+    }
+
+    .Dropdown-option {
+        background-color: var(--light-bg);
     }
 `;
 
-const CategoryLabel = styled.label`
-    color: var(--text-dark);
-    border: none;
-    font-weight: bold;
-    font-size: 14px;
-    transition: all 500ms;
-    height: 100%;
-    background-color: var(--text-light);
-    padding: 10px;
-    border-radius: var(--radius-small);
-`;
+interface CategoriesProps {
+    toReset: () => void;
+    onCategoryChange: (category: string) => void;
+    value: string;
+}
 
-export const Categories = () => {
+export const Categories = ({
+    toReset,
+    onCategoryChange,
+    value,
+}: CategoriesProps) => {
     return (
-        <article className='wrapper'>
-            <CategoriesList>
-                <CategoryItem>
-                    <CategoryInput type='radio' id='Todos' name='categories' />
-                    <CategoryLabel htmlFor='Todos'>Todos</CategoryLabel>
-                </CategoryItem>
-            </CategoriesList>
-        </article>
+        <StyledWrapper>
+            <Dropdown
+                options={optionsSearch}
+                onChange={(option) => {
+                    toReset();
+                    onCategoryChange(option.value);
+                }}
+                value={value}
+                placeholder='Select an option'
+            />
+        </StyledWrapper>
     );
 };
