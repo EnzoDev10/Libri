@@ -11,13 +11,10 @@ export const Wrapper = styled.article`
     }
 `;
 
-export const DropdownWrapper = styled(Wrapper)`
+export const DropdownWrapper = styled.div`
     .Dropdown-control {
         border-radius: var(--radius-small);
         background-color: var(--accent-color);
-    }
-    .Dropdown-root {
-        max-width: 150px;
     }
 
     .Dropdown-option {

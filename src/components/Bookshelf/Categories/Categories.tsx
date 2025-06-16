@@ -1,6 +1,7 @@
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import { DropdownWrapper } from "../../Misc";
+import styled from "styled-components";
 
 const categoriesOptions = [
     { label: "recomendaciones", value: "subject=argentina" },
@@ -16,13 +17,19 @@ interface CategoriesProps {
     value: string;
 }
 
+const CategoriesDropdownWrapper = styled(DropdownWrapper)`
+    .Dropdown-root {
+        width: 200px;
+    }
+`;
+
 export const Categories = ({
     toReset,
     onCategoryChange,
     value,
 }: CategoriesProps) => {
     return (
-        <DropdownWrapper>
+        <CategoriesDropdownWrapper>
             <Dropdown
                 options={categoriesOptions}
                 onChange={(option) => {
@@ -32,6 +39,6 @@ export const Categories = ({
                 value={value}
                 placeholder='Select an option'
             />
-        </DropdownWrapper>
+        </CategoriesDropdownWrapper>
     );
 };
