@@ -1,30 +1,14 @@
-import styled from "styled-components";
-
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import { Wrapper } from "../../Misc";
+import { DropdownWrapper } from "../../Misc";
 
-const optionsSearch = [
+const categoriesOptions = [
     { label: "recomendaciones", value: "subject=argentina" },
     { label: "Terror Cosmico", value: "author=lovecraft" },
     { label: "Romance", value: "subject=romance" },
     { label: "ficción", value: "subject=fiction" },
     { label: "autoayuda", value: "subject=selfhelp" },
 ];
-
-const StyledWrapper = styled(Wrapper)`
-    .Dropdown-control {
-        border-radius: var(--radius-small);
-        background-color: var(--accent-color);
-    }
-    .Dropdown-root {
-        max-width: 150px;
-    }
-
-    .Dropdown-option {
-        background-color: var(--light-bg);
-    }
-`;
 
 interface CategoriesProps {
     toReset: () => void;
@@ -38,9 +22,9 @@ export const Categories = ({
     value,
 }: CategoriesProps) => {
     return (
-        <StyledWrapper>
+        <DropdownWrapper>
             <Dropdown
-                options={optionsSearch}
+                options={categoriesOptions}
                 onChange={(option) => {
                     toReset();
                     onCategoryChange(option.value);
@@ -48,6 +32,6 @@ export const Categories = ({
                 value={value}
                 placeholder='Select an option'
             />
-        </StyledWrapper>
+        </DropdownWrapper>
     );
 };

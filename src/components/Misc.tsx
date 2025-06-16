@@ -10,3 +10,17 @@ export const Wrapper = styled.article`
         max-width: 1200px;
     }
 `;
+
+export const DropdownWrapper = styled(Wrapper)`
+    .Dropdown-control {
+        border-radius: var(--radius-small);
+        background-color: var(--accent-color);
+    }
+    .Dropdown-root {
+        max-width: 150px;
+    }
+
+    .Dropdown-option {
+        background-color: var(--light-bg);
+    }
+`;
