@@ -109,10 +109,16 @@ export const CatalogCard = ({ book }: { book: Book }) => {
                     </CardParagraph>
                     <Button
                         parentMethod={() => {
-                            addToCart(book);
-                            toast.success("Producto agregado al carrito.", {
-                                position: "bottom-right",
-                            });
+                            if (localStorage.getItem("authToken")) {
+                                addToCart(book);
+                                toast.success("Producto agregado al carrito.", {
+                                    position: "bottom-right",
+                                });
+                            } else {
+                                toast.error("no tienes una cuenta.", {
+                                    position: "bottom-right",
+                                });
+                            }
                         }}
                     >
                         Agregar
