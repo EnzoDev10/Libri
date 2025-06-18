@@ -6,7 +6,7 @@ interface CartProps {
     cartContent: [] | Book[];
     addToCart: (product: Book) => void;
     removeFromCart: (productId: Book) => void;
-    updateQuantity: (bookId: string | undefined, change: number) => void;
+    updateQuantity: (bookId: number | undefined, change: number) => void;
     emptyCart: () => void;
 }
 const CartContext = createContext<CartProps | null>(null);
@@ -47,7 +47,7 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     };
 
     const updateQuantity = (
-        bookId: string | undefined,
+        bookId: number | undefined,
         change: number
     ): void => {
         setCartContent((prevItems) =>

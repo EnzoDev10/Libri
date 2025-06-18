@@ -1,9 +1,11 @@
 interface Book {
     title: string;
     author: string;
-    coverId: number;
+    coverId: string;
     price: number;
-    id?: string;
+    id: number;
+    categories: string[];
+    description: string;
     quantity: number;
 }
 
