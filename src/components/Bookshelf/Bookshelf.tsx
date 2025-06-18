@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { randomInt } from "../../helpers";
 import { Searchbar } from "./SearchBar/SearchBar";
 import { X } from "lucide-react";
 
-import type { Book } from "../../interfaces";
 import { UseProducts } from "../../context/productsContext";
 import { PaginatedItems } from "./Pagination/Pagination";
 
@@ -78,32 +76,13 @@ export const Bookshelf = () => {
             setIsLoading(false);
             return;
         }
-        fetch(`https://openlibrary.org/search.json?author=lovecraft`)
+        fetch("https://6850a235e7c42cfd17992d31.mockapi.io/libri-api/productos")
             .then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
-                        const booksList = data.docs;
-                        if (booksList.length > 0) {
-                            const arr: Book[] = [];
-                            for (let i = 0; i < booksList.length; i++) {
-                                const obj: Book = {
-                                    title: booksList[i].title,
-                                    author: booksList[i].author_name[0],
-                                    coverId: booksList[i].cover_i,
-                                    id: `${booksList[i].title}-
-                                        ${booksList[i].author_name[0]}-${i}`,
-                                    price: randomInt(),
-                                    quantity: 1,
-                                };
-                                arr.push(obj);
-                            }
-                            setProductsContent(arr);
-                            setNeedToFetch(false);
-                            setIsLoading(false);
-                        } else {
-                            setIsLoading(false);
-                            setErrorExist(true);
-                        }
+                        setProductsContent(data);
+                        setNeedToFetch(false);
+                        setIsLoading(false);
                     });
                 }
             })
