@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 import { Wrapper } from "../index";
+import background from "./books-background.jpg";
 
 const HeroSection = styled.section`
-    background-color: var(--hero-bg);
     padding: 50px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+        url(${background});
     justify-content: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 `;
 
 const StyledWrapper = styled(Wrapper)`
@@ -17,6 +22,7 @@ const StyledWrapper = styled(Wrapper)`
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    padding: 25px 0;
 `;
 
 const TextWrapper = styled.h1`
