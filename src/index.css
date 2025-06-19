@@ -66,7 +66,7 @@ ul {
 
 .wrapper section:first-child {
     background-color: var(--general-bg);
-    padding: 20px 30px;
+    padding: 40px 40px;
     border-radius: var(--radius-large);
     min-width: 300px;
 }

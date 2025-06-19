@@ -9,15 +9,13 @@ import { PaginatedItems } from "./Pagination/Pagination";
 
 const Main = styled.main`
     background-color: var(--products-bg);
-    padding: 20px;
+    padding: 30px;
 `;
 
 const Section = styled.section`
     background-color: var(--general-bg);
-    padding: 20px 30px;
     border-radius: var(--radius-large);
     border: 1px solid lightblue;
-
     display: flex;
     flex-direction: column;
     min-width: 300px;
