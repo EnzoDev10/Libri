@@ -19,7 +19,7 @@ const PaginationBar = styled.div`
 
     a {
         cursor: pointer;
-        color: var(--text-dark);
+        color: var(--text-light);
     }
 `;
 
@@ -48,8 +48,8 @@ export function PaginatedItems({ products }: PaginatedItemsProps) {
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={newProducts.length}
-                    nextLabel={<ArrowRight color='var(--text-dark)' />}
-                    previousLabel={<ArrowLeft color='var(--text-dark)' />}
+                    nextLabel={<ArrowRight color='var(--text-light)' />}
+                    previousLabel={<ArrowLeft color='var(--text-light)' />}
                     renderOnZeroPageCount={null}
                 />
             </PaginationBar>

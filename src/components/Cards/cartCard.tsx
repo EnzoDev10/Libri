@@ -62,7 +62,6 @@ const ItemHeader = styled.div`
 const ItemTitle = styled.h3`
     font-size: 16px;
     font-weight: 600;
-    color: #1f2937;
     line-height: 1.3;
     flex: 1;
 
@@ -77,7 +76,6 @@ const ItemTitle = styled.h3`
 
 const ItemAuthor = styled.p`
     font-size: 14px;
-    color: #6b7280;
     margin-bottom: 8px;
 
     @media (max-width: 480px) {
@@ -133,7 +131,6 @@ const QuantityBtn = styled(Button)`
 const Quantity = styled.span`
     font-size: 14px;
     font-weight: 500;
-    color: #1f2937;
     min-width: 20px;
     text-align: center;
 
@@ -146,7 +143,6 @@ const Quantity = styled.span`
 const Price = styled.span`
     font-size: 16px;
     font-weight: 600;
-    color: #1f2937;
     flex-shrink: 0;
 
     @media (max-width: 480px) {

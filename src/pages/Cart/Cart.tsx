@@ -37,8 +37,9 @@ const Container = styled.div`
 `;
 
 const CartCard = styled.div`
-    background: var(--light-bg);
+    background: var(--general-bg);
     border-radius: var(--radius-large);
+    border: 1px solid lightblue;
 
     padding: 40px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -56,7 +57,6 @@ const CartCard = styled.div`
 const CartTitle = styled.h1`
     font-size: 28px;
     font-weight: 600;
-    color: #1f2937;
     text-align: center;
     margin-bottom: 8px;
 
@@ -66,7 +66,6 @@ const CartTitle = styled.h1`
 `;
 
 const CartSubtitle = styled.p`
-    color: #6b7280;
     text-align: center;
     margin-bottom: 32px;
     font-size: 14px;
@@ -85,14 +84,13 @@ const SummaryRow = styled.div`
     font-size: 14px;
 
     * {
-        color: var(--text-dark);
+        color: var(--text-light);
     }
 `;
 
 const SummaryRowTotal = styled(SummaryRow)`
     font-size: 18px;
     font-weight: 600;
-    color: #1f2937;
     border-top: 1px solid #e5e7eb;
     padding-top: 8px;
     margin-top: 8px;
@@ -138,7 +136,6 @@ const ContinueShoppingBtn = styled(Button)`
 
 const CheckoutBtn = styled(Button)`
     &:hover {
-        background: #1e3a8a;
         border-color: #1e3a8a;
     }
     &:focus {

@@ -17,7 +17,7 @@ const LoginContainer = styled(Wrapper)`
 `;
 
 const FormContainer = styled.div`
-    background-color: var(--light-bg);
+    background-color: var(--general-bg);
     border-radius: 0.5rem;
     padding: 2rem;
 `;

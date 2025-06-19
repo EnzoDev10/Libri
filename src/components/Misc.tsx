@@ -18,6 +18,6 @@ export const DropdownWrapper = styled.div`
     }
 
     .Dropdown-option {
-        background-color: var(--light-bg);
+        background-color: var(--general-bg);
     }
 `;

@@ -1,6 +1,6 @@
 :root {
     --dark-bg: #021526;
-    --light-bg: #f3f4f6;
+    --general-bg: #213555;
     --products-bg: #0c396f;
     --hero-bg: #27445d;
     --destructive: #b0041a;
@@ -67,7 +67,7 @@ ul {
 }
 
 .wrapper section:first-child {
-    background-color: var(--light-bg);
+    background-color: var(--general-bg);
     padding: 20px 30px;
     border-radius: var(--radius-large);
     min-width: 300px;

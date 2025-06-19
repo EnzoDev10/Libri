@@ -13,9 +13,11 @@ const Main = styled.main`
 `;
 
 const Section = styled.section`
-    background-color: var(--light-bg);
+    background-color: var(--general-bg);
     padding: 20px 30px;
     border-radius: var(--radius-large);
+    border: 1px solid lightblue;
+
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -24,7 +26,7 @@ const Section = styled.section`
 `;
 
 const Heading = styled.h2`
-    color: var(--text-dark);
+    color: var(--text-light);
 `;
 
 const BookNav = styled.nav`
