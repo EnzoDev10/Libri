@@ -12,8 +12,6 @@ const StyledMain = styled.main`
 `;
 
 const StyledWrapper = styled(Wrapper)`
-    /*     background-color: var(--light-bg);
- */
     display: flex;
     align-items: center;
     gap: 25px;
@@ -22,15 +20,14 @@ const StyledWrapper = styled(Wrapper)`
 `;
 
 const Card = styled.div`
-    background-color: #ffffff; /* White card background */
-    border-radius: 0.5rem; /* Rounded corners */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    background-color: var(--general-bg);
+    border-radius: var(--radius-small);
+    border: 1px solid lightblue;
     width: 100%;
     max-width: 400px;
     padding: 1.5rem;
     text-align: center;
-    color: #1e293b; /* Dark text for card content */
+    color: var(--text-light);
 `;
 
 const CardHeader = styled.div`
@@ -41,27 +38,24 @@ const CardHeader = styled.div`
 `;
 
 const AvatarPlaceholder = styled.div`
-    width: 96px; /* h-24 */
-    height: 96px; /* w-24 */
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
-    background-color: #3b82f6; /* Primary blue for avatar fallback */
+    background-color: var(--light-accent-color);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    font-size: 2.5rem; /* text-4xl */
-    color: #ffffff; /* White text for avatar fallback */
+    font-size: 2.5rem;
 `;
 
 const UsernameText = styled.h2`
-    font-size: 1.5rem; /* text-2xl */
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 0.25rem;
-    color: var(--text-dark);
 `;
 
 const PasswordText = styled.p`
-    color: #64748b; /* Gray text for description */
     display: flex;
     gap: 10px;
 `;
@@ -69,12 +63,11 @@ const PasswordText = styled.p`
 const CardContent = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* space-y-4 */
+    gap: 1rem;
 `;
 
 const StyledButton = styled(Button)<{ $variant?: "destructive" }>`
     width: 100%;
-    color: white;
     display: flex;
     justify-content: center;
 `;
@@ -82,7 +75,6 @@ const StyledButton = styled(Button)<{ $variant?: "destructive" }>`
 const StyledHeading = styled.h1`
     font-size: 30px;
     font-weight: 600;
-    color: #1f2937;
     text-align: center;
     margin-bottom: 30px;
 
