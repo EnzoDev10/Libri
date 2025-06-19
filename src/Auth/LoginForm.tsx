@@ -10,6 +10,7 @@ const StyledMain = styled.main`
     padding: 20px;
     min-height: 100%;
     height: fit-content;
+    color: var(--text-light);
 `;
 
 const LoginContainer = styled(Wrapper)`
@@ -29,14 +30,12 @@ const FormHeader = styled.div`
 const FormTitle = styled.h2`
     font-size: 1.25rem;
     font-weight: 500;
-    color: var(--text-dark);
 
     margin-bottom: 0.5rem;
     margin-top: 0;
 `;
 
 const FormSubtitle = styled.p`
-    color: #4b5563;
     font-size: 0.875rem;
     margin: 0;
 `;
@@ -56,7 +55,6 @@ const FormLabel = styled.label`
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #374151;
     margin-bottom: 0.5rem;
 `;
 
@@ -104,21 +102,7 @@ const Checkbox = styled.input`
     }
 `;
 
-const CheckboxLabel = styled.span`
-    color: #4b5563;
-`;
-
-const ForgotPassword = styled.button`
-    color: #3b82f6;
-    text-decoration: none;
-    transition: color 0.2s ease-in-out;
-    border: none;
-    background-color: transparent;
-
-    &:hover {
-        color: #1d4ed8;
-    }
-`;
+const CheckboxLabel = styled.span``;
 
 const SubmitButton = styled(Button)`
     width: 100%;
@@ -207,20 +191,6 @@ export const LoginForm = () => {
                                     <Checkbox type='checkbox' />
                                     <CheckboxLabel>Recuerdame</CheckboxLabel>
                                 </CheckboxWrapper>
-                                <ForgotPassword
-                                    type='button'
-                                    onClick={() =>
-                                        toast.error(
-                                            "mala suerte, esta función no fue implementada.",
-                                            {
-                                                position: "bottom-right",
-                                                icon: "🤷",
-                                            }
-                                        )
-                                    }
-                                >
-                                    Olvidaste tu contraseña?
-                                </ForgotPassword>
                             </FormOptions>
                             <SubmitButton>Registrarse</SubmitButton>
                         </Form>

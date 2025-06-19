@@ -39,8 +39,8 @@ const StyledLink = styled(Link)<{ $variant?: "transparent" | "destructive" }>`
         props.$variant == "transparent" &&
         css`
             background-color: transparent;
-            border: 1px solid var(--text-dark);
-            color: var(--text-dark);
+            border: 1px solid var(--text-light);
+            
 
             &:hover {
                 background-color: var(--light-accent-color);

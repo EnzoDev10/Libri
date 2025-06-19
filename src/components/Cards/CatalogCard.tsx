@@ -18,7 +18,7 @@ const CardArticle = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #abb;
+    background-color: #9cbdbf;
 `;
 
 const CardParagraph = styled.p`
