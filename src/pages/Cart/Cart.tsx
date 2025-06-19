@@ -222,7 +222,6 @@ export const CartContent = () => {
                         parentMethod={() => {
                             emptyCart();
                             toast("Carrito Vaciado.", {
-                                position: "bottom-right",
                                 icon: "🗑️",
                             });
                         }}
@@ -231,11 +230,7 @@ export const CartContent = () => {
                     </Button>
 
                     <CheckoutBtn
-                        parentMethod={() =>
-                            toast.success("Compra realizada.", {
-                                position: "bottom-right",
-                            })
-                        }
+                        parentMethod={() => toast.success("Compra realizada.")}
                     >
                         Comprar
                     </CheckoutBtn>

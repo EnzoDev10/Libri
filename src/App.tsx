@@ -37,7 +37,16 @@ function App() {
                                 }
                             ></Route>
                         </Routes>
-                        <Toaster />
+                        <Toaster
+                            position='bottom-right'
+                            toastOptions={{
+                                style: {
+                                    backgroundColor: "var(--accent-color)",
+                                    color: "var(--text-light)",
+                                    border: "1px solid var(--text-light)",
+                                },
+                            }}
+                        />
                     </CartContextProvider>
                 </ProductsContextProvider>
             </AuthProvider>

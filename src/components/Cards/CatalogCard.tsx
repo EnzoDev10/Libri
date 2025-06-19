@@ -111,13 +111,9 @@ export const CatalogCard = ({ book }: { book: Book }) => {
                         parentMethod={() => {
                             if (localStorage.getItem("authToken")) {
                                 addToCart(book);
-                                toast.success("Producto agregado al carrito.", {
-                                    position: "bottom-right",
-                                });
+                                toast.success("Producto agregado al carrito.");
                             } else {
-                                toast.error("no tienes una cuenta.", {
-                                    position: "bottom-right",
-                                });
+                                toast.error("no tienes una cuenta.");
                             }
                         }}
                     >

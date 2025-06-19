@@ -214,7 +214,6 @@ export const CartCard = ({ book }: { book: Book }) => {
                         parentMethod={() => {
                             removeFromCart(book);
                             toast("Producto eliminado del carrito.", {
-                                position: "bottom-right",
                                 icon: "🗑️",
                             });
                         }}

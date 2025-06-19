@@ -94,9 +94,7 @@ export const Dashboard = () => {
     function closeSession() {
         context?.logout();
         Navigate("/");
-        toast.success("sesion cerrada con exito.", {
-            position: "bottom-right",
-        });
+        toast.success("sesion cerrada con exito.");
     }
 
     return (
