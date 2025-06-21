@@ -12,7 +12,7 @@ const CartMain = styled.main`
     flex-direction: column;
     align-items: stretch;
     background-color: var(--products-bg);
-    padding: 30px;
+    padding: 30px 0;
     min-height: 100%;
     height: fit-content;
 `;
@@ -42,15 +42,9 @@ const CartCard = styled.div`
     border: 1px solid lightblue;
 
     padding: 40px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 
     @media (max-width: 480px) {
-        padding: 20px 16px;
-        margin: 0 8px;
-    }
-    @media (max-width: 360px) {
-        padding: 16px 12px;
-        margin: 0 4px;
+        padding: 20px;
     }
 `;
 

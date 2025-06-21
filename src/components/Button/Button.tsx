@@ -23,7 +23,8 @@ background-color: var(--accent-color);
 const StyledLink = styled(Link)<{ $variant?: "transparent" | "destructive" }>`
     ${sharedStyles}
     border-color: var(--text-light);
-
+    min-width: 70px;
+    
     ${(props) =>
         props.$variant == "destructive" &&
         css`
@@ -40,7 +41,6 @@ const StyledLink = styled(Link)<{ $variant?: "transparent" | "destructive" }>`
         css`
             background-color: transparent;
             border: 1px solid var(--text-light);
-            
 
             &:hover {
                 background-color: var(--light-accent-color);
