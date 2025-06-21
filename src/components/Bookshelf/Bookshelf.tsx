@@ -6,10 +6,11 @@ import { X } from "lucide-react";
 
 import { UseProducts } from "../../context/productsContext";
 import { PaginatedItems } from "./Pagination/Pagination";
+import { Wrapper } from "../Misc";
 
 const Main = styled.main`
     background-color: var(--products-bg);
-    padding: 30px;
+    padding: 30px 0;
 `;
 
 const Section = styled.section`
@@ -21,6 +22,7 @@ const Section = styled.section`
     min-width: 300px;
     gap: 15px;
     height: fit-content;
+    padding: 20px;
 `;
 
 const Heading = styled.h2`
@@ -97,7 +99,7 @@ export const Bookshelf = () => {
 
     return (
         <Main>
-            <div className='wrapper'>
+            <Wrapper>
                 <Section>
                     <BookNav>
                         <Heading>Productos</Heading>
@@ -116,7 +118,7 @@ export const Bookshelf = () => {
                         )}
                     </Data>
                 </Section>
-            </div>
+            </Wrapper>
         </Main>
     );
 };
