@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Home, Cart, Dashboard } from "./pages/pagesIndex";
-import { ProtectedRoute, LoginForm } from "./Auth/authIndex";
+import { ProtectedRoute, LoginForm } from "./components/Auth/authIndex";
 import {
     CartContextProvider,
     ProductsContextProvider,

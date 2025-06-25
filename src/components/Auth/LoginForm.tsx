@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../context/contextIndex";
-import { Footer, Header, Button, Wrapper } from "../components";
+import { useAuthContext } from "../../context/contextIndex";
+import { Footer, Header, Button, Wrapper } from "..";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 
@@ -59,6 +59,7 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled.input`
+    color: var(--text-dark);
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
@@ -77,32 +78,6 @@ const FormInput = styled.input`
         color: #9ca3af;
     }
 `;
-
-const FormOptions = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.875rem;
-`;
-
-const CheckboxWrapper = styled.label`
-    display: flex;
-    align-items: center;
-`;
-
-const Checkbox = styled.input`
-    margin-right: 0.5rem;
-    border-radius: 0.25rem;
-
-    color: #3b82f6;
-    outline: none;
-
-    &:focus {
-        box-shadow: 0 0 0 2px var(--accent-color);
-    }
-`;
-
-const CheckboxLabel = styled.span``;
 
 const SubmitButton = styled(Button)`
     width: 100%;
@@ -125,6 +100,8 @@ const SubmitButton = styled(Button)`
 
 export const LoginForm = () => {
     const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+
     const [password, setPassword] = useState("");
     const authContext = useAuthContext();
     const navigate = useNavigate();
@@ -133,16 +110,17 @@ export const LoginForm = () => {
         e.preventDefault();
         // Authentication simulation
         if (email === "adminLocal@gmail.com" && password === "1234") {
-            authContext?.login(email);
+            authContext?.login(username, true);
             toast.success("Bienvenido, admin.", { position: "bottom-right" });
             navigate("/dashboard");
         } else {
-            authContext?.login(email);
+            authContext?.login(username, false);
             navigate("/dashboard");
             toast.success("Cuenta creada con exito.", {
                 position: "bottom-right",
             });
         }
+        console.log(email);
     };
 
     return (
@@ -167,8 +145,22 @@ export const LoginForm = () => {
                                 <FormInput
                                     type='email'
                                     id='email'
+                                    required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    placeholder='ej. correoCompra@gmail.com'
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormLabel htmlFor='name'>Nombre</FormLabel>
+                                <FormInput
+                                    type='text'
+                                    id='name'
+                                    required
+                                    value={username}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
                                     placeholder='ej. José José'
                                 />
                             </FormGroup>
@@ -179,6 +171,7 @@ export const LoginForm = () => {
                                 <FormInput
                                     type='password'
                                     id='password'
+                                    required
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
@@ -186,12 +179,12 @@ export const LoginForm = () => {
                                     placeholder='••••••••'
                                 />
                             </FormGroup>
-                            <FormOptions>
+                            {/*                             <FormOptions>
                                 <CheckboxWrapper>
                                     <Checkbox type='checkbox' />
                                     <CheckboxLabel>Recuerdame</CheckboxLabel>
                                 </CheckboxWrapper>
-                            </FormOptions>
+                            </FormOptions> */}
                             <SubmitButton>Registrarse</SubmitButton>
                         </Form>
                     </FormContainer>
