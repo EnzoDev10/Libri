@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Searchbar } from "./SearchBar/SearchBar";
@@ -53,6 +52,7 @@ const Data = styled.article`
     flex-wrap: wrap;
     height: fit-content;
     min-height: 50vh;
+    flex-direction: column;
 `;
 
 const Error = styled.div`
@@ -67,35 +67,7 @@ const Error = styled.div`
 `;
 
 export const Bookshelf = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [errorExist, setErrorExist] = useState(false);
-
-    const { productsContent, setProductsContent, needToFetch, setNeedToFetch } =
-        UseProducts();
-
-    useEffect(() => {
-        if (needToFetch == false) {
-            setIsLoading(false);
-            return;
-        }
-        fetch("https://6850a235e7c42cfd17992d31.mockapi.io/libri-api/productos")
-            .then((response) => {
-                if (response.ok) {
-                    response.json().then((data) => {
-                        setProductsContent(data);
-                        setNeedToFetch(false);
-                        setIsLoading(false);
-                    });
-                }
-            })
-            .catch((error) => {
-                console.log(
-                    "Hubo un problema con la petición Fetch:" + error.message
-                );
-                setIsLoading(false);
-                setErrorExist(true);
-            });
-    }, [setProductsContent, needToFetch, setNeedToFetch]);
+    const { productsContent, isLoading, errorExists } = UseProducts();
 
     return (
         <Main>
@@ -107,13 +79,13 @@ export const Bookshelf = () => {
                     </BookNav>
                     <Data>
                         {isLoading && <Heading>Cargando...</Heading>}
-                        {errorExist && (
+                        {errorExists && (
                             <Error>
                                 <X size={64} />
                                 <p>Ocurrió un error.</p>
                             </Error>
                         )}
-                        {!errorExist && !isLoading && productsContent && (
+                        {!errorExists && !isLoading && productsContent && (
                             <PaginatedItems products={productsContent} />
                         )}
                     </Data>
