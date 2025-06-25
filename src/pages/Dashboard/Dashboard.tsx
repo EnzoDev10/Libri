@@ -1,14 +1,16 @@
 import { Wrapper, Header, Footer, Button } from "../../components";
-import { LogOut } from "lucide-react";
+import { CirclePlus, LogOut, X } from "lucide-react";
 import { styled } from "styled-components";
 import { useAuthContext } from "../../context/AuthContext";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { PostForm } from "./PostForm";
+import { DeleteProduct } from "./deleteProduct";
+import { useState } from "react";
 
 const StyledMain = styled.main`
     background-color: var(--products-bg);
     padding: 20px;
-    height: 100%;
+    min-height: 100%;
+    height: fit-content;
 `;
 
 const StyledWrapper = styled(Wrapper)`
@@ -55,11 +57,6 @@ const UsernameText = styled.h2`
     margin-bottom: 0.25rem;
 `;
 
-const PasswordText = styled.p`
-    display: flex;
-    gap: 10px;
-`;
-
 const CardContent = styled.div`
     display: flex;
     flex-direction: column;
@@ -84,18 +81,13 @@ const StyledHeading = styled.h1`
 `;
 
 export const Dashboard = () => {
-    // Dummy data for visual representation
-    const username = "usuario";
-    const password = "••••••••";
-    const avatarInitial = username.charAt(0).toUpperCase();
-    const context = useAuthContext();
-    const Navigate = useNavigate();
+    const auth = useAuthContext();
+    const username = localStorage.getItem("name");
 
-    function closeSession() {
-        context?.logout();
-        Navigate("/");
-        toast.success("sesion cerrada con exito.");
-    }
+    const [AdminActions, setAdminActions] = useState({
+        addProduct: false,
+        deleteProduct: false,
+    });
 
     return (
         <>
@@ -107,20 +99,46 @@ export const Dashboard = () => {
                         <StyledHeading>Dashboard</StyledHeading>
                         <CardHeader>
                             <AvatarPlaceholder>
-                                {avatarInitial}
+                                {username?.charAt(0).toUpperCase()}
                             </AvatarPlaceholder>
                             <UsernameText>{username}</UsernameText>
-                            <PasswordText>{password}</PasswordText>
                         </CardHeader>
                         <CardContent>
+                            {localStorage.getItem("isAdmin") && (
+                                <>
+                                    <StyledButton
+                                        parentMethod={() =>
+                                            setAdminActions({
+                                                addProduct: true,
+                                                deleteProduct: false,
+                                            })
+                                        }
+                                    >
+                                        <CirclePlus size={16} /> Agregar un
+                                        producto
+                                    </StyledButton>
+                                    <StyledButton
+                                        parentMethod={() =>
+                                            setAdminActions({
+                                                addProduct: false,
+                                                deleteProduct: true,
+                                            })
+                                        }
+                                    >
+                                        <X size={16} /> Eliminar producto
+                                    </StyledButton>
+                                </>
+                            )}
                             <StyledButton
                                 variant='destructive'
-                                parentMethod={() => closeSession()}
+                                parentMethod={() => auth?.logout()}
                             >
                                 <LogOut size={16} /> Cerrar Sesión
                             </StyledButton>
                         </CardContent>
                     </Card>
+                    {AdminActions.addProduct && <PostForm />}
+                    {AdminActions.deleteProduct && <DeleteProduct />}
                 </StyledWrapper>
             </StyledMain>
             <Footer />

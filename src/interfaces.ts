@@ -3,7 +3,7 @@ interface Book {
     author: string;
     coverId: string;
     price: number;
-    id: number;
+    id?: number;
     categories: string[];
     description: string;
     quantity: number;
