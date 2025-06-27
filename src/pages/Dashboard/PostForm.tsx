@@ -3,6 +3,7 @@ import styled from "styled-components";
 import toast from "react-hot-toast";
 import { Button } from "../../components";
 import type { Book } from "../../interfaces";
+import { UseProducts } from "../../context/productsContext";
 
 const FormContainer = styled.div`
     background-color: var(--general-bg);
@@ -118,6 +119,7 @@ export const PostForm = () => {
     const [categories, setCategories] = useState("");
     const [description, setDescription] = useState("");
 
+    const { setNeedToFetch } = UseProducts();
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -142,10 +144,10 @@ export const PostForm = () => {
             }
         ).then((res) => {
             if (res.ok) {
-                toast("form posteada");
-                return res.json();
+                toast.success("Producto agregado al catálogo.");
+                setNeedToFetch(true);
             } else {
-                toast.error("form no posteada");
+                toast.error("El producto no pudo ser agregado al catálogo.");
             }
         });
     };
