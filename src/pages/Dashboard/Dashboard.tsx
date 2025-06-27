@@ -1,7 +1,7 @@
 import { Wrapper, Header, Footer, Button } from "../../components";
 import { CirclePlus, LogOut, X } from "lucide-react";
 import { styled } from "styled-components";
-import { useAuthContext } from "../../context/AuthContext";
+import { UseAuthContext } from "../../context/AuthContext";
 import { PostForm } from "./PostForm";
 import { DeleteProduct } from "./deleteProduct";
 import { useState } from "react";
@@ -81,7 +81,7 @@ const StyledHeading = styled.h1`
 `;
 
 export const Dashboard = () => {
-    const auth = useAuthContext();
+    const auth = UseAuthContext();
     const username = localStorage.getItem("name");
 
     const [AdminActions, setAdminActions] = useState({

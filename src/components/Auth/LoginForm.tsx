@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context/contextIndex";
+import { UseAuthContext } from "../../context/contextIndex";
 import { Footer, Header, Button, Wrapper } from "..";
 import styled from "styled-components";
 import toast from "react-hot-toast";
@@ -103,7 +103,7 @@ export const LoginForm = () => {
     const [username, setUsername] = useState("");
 
     const [password, setPassword] = useState("");
-    const authContext = useAuthContext();
+    const authContext = UseAuthContext();
     const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent) => {

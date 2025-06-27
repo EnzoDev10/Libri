@@ -9,6 +9,18 @@ interface authProps {
 
 const AuthContext = createContext<authProps | null>(null);
 
+export const UseAuthContext = () => {
+    const content = useContext(AuthContext);
+
+    if (!content) {
+        throw new Error(
+            "UseAuthContext has to be used within <AuthContext.Provider>"
+        );
+    }
+
+    return content;
+};
+
 export function AuthProvider({ children }: PropsWithChildren) {
     const Navigate = useNavigate();
 
@@ -37,5 +49,3 @@ export function AuthProvider({ children }: PropsWithChildren) {
         </AuthContext.Provider>
     );
 }
-
-export const useAuthContext = () => useContext(AuthContext);
