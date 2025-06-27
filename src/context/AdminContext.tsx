@@ -55,7 +55,7 @@ export function AdminProvider({ children }: PropsWithChildren) {
             if (res.ok) {
                 setNeedToFetch(true);
                 closeModal();
-                toast.success("Producto eliminado del catalogo.");
+                toast.success("Producto eliminado del catálogo.");
             } else {
                 toast.error("No se pudo eliminar el producto.");
             }
