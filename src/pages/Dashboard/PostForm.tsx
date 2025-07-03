@@ -1,9 +1,10 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import toast from "react-hot-toast";
 import { Button } from "../../components";
 import type { Book } from "../../interfaces";
 import { UseProducts } from "../../context/productsContext";
+import { CircleAlert } from "lucide-react";
 
 const FormContainer = styled.div`
     background-color: var(--general-bg);
@@ -38,6 +39,7 @@ const Form = styled.form`
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
+    position: relative;
 `;
 
 const FormLabel = styled.label`
@@ -48,7 +50,7 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled.input`
-    color: var(--text-dark);
+    background-color: var(--light-accent-color);
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
@@ -60,7 +62,7 @@ const FormInput = styled.input`
     &:focus {
         outline: none;
         border-color: transparent;
-        box-shadow: 0 0 0 2px #3b82f6;
+        box-shadow: 0 0 0 2px green;
     }
 
     &::placeholder {
@@ -79,12 +81,12 @@ const FormTextarea = styled.textarea`
     border-radius: 0.375rem;
     font-size: 1rem;
     transition: all 0.2s ease-in-out;
-    box-sizing: border-box;
+    background-color: var(--light-accent-color);
 
     &:focus {
         outline: none;
         border-color: transparent;
-        box-shadow: 0 0 0 2px #3b82f6;
+        box-shadow: 0 0 0 2px green;
     }
 
     &::placeholder {
@@ -111,6 +113,29 @@ const SubmitButton = styled(Button)`
     }
 `;
 
+const ErrorIcon = styled(CircleAlert)<{
+    $isVisible: boolean;
+}>`
+    display: none;
+
+    ${(props) =>
+        props.$isVisible &&
+        css`
+            display: initial;
+            background-color: var(--destructive);
+            color: white;
+
+            &:hover {
+                background-color: var(--destructive-hover);
+            }
+        `};
+`;
+
+/* 
+! crear un objeto que guarde los errores de todos los inputs para luego utilizarlo para mostrar mensajes
+! O volver a crear los estados por pares de valor y error y manejarlo asi.
+*/
+
 export const PostForm = () => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
@@ -119,20 +144,26 @@ export const PostForm = () => {
     const [categories, setCategories] = useState("");
     const [description, setDescription] = useState("");
 
+    const [error, setError] = useState(false);
+
     const { setNeedToFetch } = UseProducts();
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         const arrOfCategories = categories.split(",");
 
+        for (let i = 0; i < arrOfCategories.length; i++) {
+            arrOfCategories[i] = arrOfCategories[i].trim();
+        }
+
         const newProduct: Book = {
-            title: title,
-            author: author,
-            coverId: coverId,
+            title: title.trim(),
+            author: author.trim(),
+            coverId: coverId.trim(),
             price: price,
             quantity: 1,
             categories: arrOfCategories,
-            description: description,
+            description: description.trim(),
         };
 
         fetch(
@@ -168,9 +199,13 @@ export const PostForm = () => {
                             type='text'
                             id='title'
                             required
-                            onChange={(e) => setTitle(e.target.value)}
-                            placeholder='ej. Cronica de una muerte anunciada'
+                            autoFocus
+                            onChange={(e) => {
+                                setTitle(e.target.value);
+                            }}
+                            onInvalid={() => setError(true)}
                         />
+                        <ErrorIcon $isVisible={error} />
                     </FormGroup>
                     <FormGroup>
                         <FormLabel htmlFor='author'>Autor</FormLabel>
@@ -178,8 +213,9 @@ export const PostForm = () => {
                             type='text'
                             id='author'
                             required
-                            onChange={(e) => setAuthor(e.target.value)}
-                            placeholder='ej. Gabriel Garcia Marquez'
+                            onChange={(e) => {
+                                setAuthor(e.target.value);
+                            }}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -190,8 +226,9 @@ export const PostForm = () => {
                             type='string'
                             id='coverId'
                             required
-                            onChange={(e) => setCoverId(e.target.value)}
-                            placeholder='ej. Gabriel Garcia Marquez'
+                            onChange={(e) => {
+                                setCoverId(e.target.value);
+                            }}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -201,7 +238,6 @@ export const PostForm = () => {
                             id='price'
                             required
                             onChange={(e) => setPrice(+e.target.value)}
-                            placeholder='ej. 15000'
                         />
                     </FormGroup>
                     <FormGroup>
@@ -210,8 +246,9 @@ export const PostForm = () => {
                             type='text'
                             id='categories'
                             required
-                            placeholder='ej. ficción,romance'
-                            onChange={(e) => setCategories(e.target.value)}
+                            onChange={(e) => {
+                                setCategories(e.target.value);
+                            }}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -220,8 +257,9 @@ export const PostForm = () => {
                             name=''
                             id='description'
                             required
-                            placeholder='ej. Basada en un suceso real, la reconstrucción literaria, laberíntica y polifónica del ineluctable y brutal asesinato de un hombre en una remota población fluvial caribeña significa la apuesta más arriesgada de Gabriel García Márquez hacia una novela total.'
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => {
+                                setDescription(e.target.value);
+                            }}
                         />
                     </FormGroup>
 
