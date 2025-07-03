@@ -86,7 +86,7 @@ export const Bookshelf = () => {
                             </Error>
                         )}
                         {!errorExists && !isLoading && productsContent && (
-                            <PaginatedItems products={productsContent} />
+                            <PaginatedItems variant='bookshelf' />
                         )}
                     </Data>
                 </Section>

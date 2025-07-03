@@ -5,10 +5,7 @@ import type { Book } from "../../../interfaces";
 import { useState } from "react";
 import styled from "styled-components";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-
-interface PaginatedItemsProps {
-    products: Book[];
-}
+import { UseProducts } from "../../../context/productsContext";
 
 const PaginationBar = styled.div`
     ul {
@@ -23,17 +20,21 @@ const PaginationBar = styled.div`
     }
 `;
 
+interface PaginatedItemsProps {
+    variant: "bookshelf" | "admin";
+}
 const chunks = (arr: Book[]) =>
     Array.from(new Array(Math.ceil(arr.length / 10)), (_, i) =>
         arr.slice(i * 10, i * 10 + 10)
     );
 
-export function PaginatedItems({ products }: PaginatedItemsProps) {
+export function PaginatedItems({ variant }: PaginatedItemsProps) {
+    const { productsContent } = UseProducts();
     const [currentPage, setCurrentPage] = useState<Book[] | []>(
-        products.slice(0, 10)
+        productsContent.slice(0, 10)
     );
 
-    const newProducts = chunks(products);
+    const newProducts = chunks(productsContent);
     const handlePageClick = (event: { selected: number }) => {
         const newPage = newProducts[event.selected];
         setCurrentPage(newPage);
@@ -41,7 +42,7 @@ export function PaginatedItems({ products }: PaginatedItemsProps) {
 
     return (
         <>
-            <Books variant='bookshelf' arrayOfBooks={currentPage} />
+            <Books variant={variant} arrayOfBooks={currentPage} />
             <PaginationBar>
                 <ReactPaginate
                     breakLabel='...'

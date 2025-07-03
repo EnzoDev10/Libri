@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Books } from "../../components";
-import { UseProducts } from "../../context/productsContext";
 import { AdminProvider } from "../../context/AdminContext";
+import { PaginatedItems } from "../../components/Bookshelf/Pagination/Pagination";
 
 const DeleteContainer = styled.div`
     background-color: var(--general-bg);
@@ -9,6 +8,11 @@ const DeleteContainer = styled.div`
     padding: 2rem;
     width: 100%;
     max-width: 800px;
+
+    ul {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 const DeleteHeader = styled.div`
@@ -29,8 +33,6 @@ const DeleteSubtitle = styled.p`
 `;
 
 export const DeleteProduct = () => {
-    const { productsContent } = UseProducts();
-
     return (
         <>
             <DeleteContainer>
@@ -42,7 +44,7 @@ export const DeleteProduct = () => {
                     </DeleteSubtitle>
                 </DeleteHeader>
                 <AdminProvider>
-                    <Books arrayOfBooks={productsContent} variant='admin' />
+                    <PaginatedItems variant='admin' />
                 </AdminProvider>
             </DeleteContainer>
         </>
