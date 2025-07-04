@@ -122,11 +122,7 @@ export const Bookshelf = () => {
                             !notFound && (
                                 <PaginatedItems
                                     variant='bookshelf'
-                                    content={
-                                        booksToShow.length > 0
-                                            ? booksToShow
-                                            : undefined
-                                    }
+                                    content={booksToShow}
                                 />
                             )}
                     </Data>
