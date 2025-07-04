@@ -2,7 +2,7 @@
 import ReactPaginate from "react-paginate";
 import { Books } from "../../Books/Books";
 import type { Book } from "../../../interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { UseProducts } from "../../../context/productsContext";
@@ -22,19 +22,25 @@ const PaginationBar = styled.div`
 
 interface PaginatedItemsProps {
     variant: "bookshelf" | "admin";
+    content?: Book[] | [];
 }
 const chunks = (arr: Book[]) =>
     Array.from(new Array(Math.ceil(arr.length / 10)), (_, i) =>
         arr.slice(i * 10, i * 10 + 10)
     );
 
-export function PaginatedItems({ variant }: PaginatedItemsProps) {
+export function PaginatedItems({ variant, content = [] }: PaginatedItemsProps) {
     const { productsContent } = UseProducts();
+    const arrayOfBooks = content.length === 0 ? productsContent : content;
     const [currentPage, setCurrentPage] = useState<Book[] | []>(
-        productsContent.slice(0, 10)
+        arrayOfBooks.slice(0, 10)
     );
 
-    const newProducts = chunks(productsContent);
+    useEffect(() => {
+        setCurrentPage(content);
+    }, [content]);
+
+    const newProducts = chunks(arrayOfBooks);
     const handlePageClick = (event: { selected: number }) => {
         const newPage = newProducts[event.selected];
         setCurrentPage(newPage);

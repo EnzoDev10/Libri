@@ -6,6 +6,8 @@ import { X } from "lucide-react";
 import { UseProducts } from "../../context/productsContext";
 import { PaginatedItems } from "./Pagination/Pagination";
 import { Wrapper } from "../Misc";
+import { useEffect, useState } from "react";
+import type { Book } from "../../interfaces";
 
 const Main = styled.main`
     background-color: var(--products-bg);
@@ -69,13 +71,31 @@ const Error = styled.div`
 export const Bookshelf = () => {
     const { productsContent, isLoading, errorExists } = UseProducts();
 
+    const [booksToShow, setBooksToShow] = useState<Book[] | []>([]);
+
+    const [currentQuery, setCurrentQuery] = useState("");
+
+    useEffect(() => {
+        if (currentQuery) {
+            const filteredData = productsContent.filter((book) => {
+                return Object.values(book)
+                    .join("")
+                    .toLowerCase()
+                    .includes(currentQuery.toLowerCase());
+            });
+            setBooksToShow(filteredData);
+        } else {
+            setBooksToShow(productsContent);
+        }
+    }, [currentQuery, productsContent]);
+
     return (
         <Main>
             <Wrapper>
                 <Section>
                     <BookNav>
                         <Heading>Productos</Heading>
-                        <Searchbar />
+                        <Searchbar setter={setCurrentQuery} />
                     </BookNav>
                     <Data>
                         {isLoading && <Heading>Cargando...</Heading>}
@@ -86,7 +106,10 @@ export const Bookshelf = () => {
                             </Error>
                         )}
                         {!errorExists && !isLoading && productsContent && (
-                            <PaginatedItems variant='bookshelf' />
+                            <PaginatedItems
+                                variant='bookshelf'
+                                content={booksToShow}
+                            />
                         )}
                     </Data>
                 </Section>
