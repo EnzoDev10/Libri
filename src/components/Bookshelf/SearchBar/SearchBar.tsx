@@ -25,7 +25,7 @@ const SearchInput = styled.input`
 const IconWrapper = styled.div`
     background-color: var(--accent-color);
     padding: 10px;
-    border: 1px solid white;
+    border: 1px solid var(--text-light);
 
     border-left: none;
     border-radius: var(--radius-small);
