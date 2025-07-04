@@ -37,8 +37,10 @@ export function PaginatedItems({ variant, content = [] }: PaginatedItemsProps) {
     );
 
     useEffect(() => {
-        setCurrentPage(content);
-    }, [content]);
+        const newProducts = chunks(arrayOfBooks);
+
+        setCurrentPage(newProducts[0]);
+    }, [arrayOfBooks]);
 
     const newProducts = chunks(arrayOfBooks);
     const handlePageClick = (event: { selected: number }) => {
