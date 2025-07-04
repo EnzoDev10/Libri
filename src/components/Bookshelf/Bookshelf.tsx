@@ -62,28 +62,33 @@ const Error = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    * {
-        color: #cc0000;
-    }
 `;
 
 export const Bookshelf = () => {
     const { productsContent, isLoading, errorExists } = UseProducts();
 
-    const [booksToShow, setBooksToShow] = useState<Book[] | []>([]);
+    const [booksToShow, setBooksToShow] = useState<Book[] | []>(
+        productsContent
+    );
 
     const [currentQuery, setCurrentQuery] = useState("");
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         if (currentQuery) {
+            setNotFound(false);
             const filteredData = productsContent.filter((book) => {
-                return Object.values(book)
-                    .join("")
-                    .toLowerCase()
-                    .includes(currentQuery.toLowerCase());
+                const title = book.title?.toLowerCase() || "";
+                const author = book.author?.toLowerCase() || "";
+                const query = currentQuery.toLowerCase();
+                return title.includes(query) || author.includes(query);
             });
-            setBooksToShow(filteredData);
+
+            if (filteredData.length > 0) {
+                setBooksToShow(filteredData);
+            } else {
+                setNotFound(true);
+            }
         } else {
             setBooksToShow(productsContent);
         }
@@ -101,16 +106,29 @@ export const Bookshelf = () => {
                         {isLoading && <Heading>Cargando...</Heading>}
                         {errorExists && (
                             <Error>
-                                <X size={64} />
+                                <X size={64} color='red' />
                                 <p>Ocurrió un error.</p>
                             </Error>
                         )}
-                        {!errorExists && !isLoading && productsContent && (
-                            <PaginatedItems
-                                variant='bookshelf'
-                                content={booksToShow}
-                            />
+                        {notFound && (
+                            <Error>
+                                <X size={64} color='red' />
+                                <p>El producto que buscas no existe.</p>
+                            </Error>
                         )}
+                        {!errorExists &&
+                            !isLoading &&
+                            productsContent &&
+                            !notFound && (
+                                <PaginatedItems
+                                    variant='bookshelf'
+                                    content={
+                                        booksToShow.length > 0
+                                            ? booksToShow
+                                            : undefined
+                                    }
+                                />
+                            )}
                     </Data>
                 </Section>
             </Wrapper>
