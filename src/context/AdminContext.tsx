@@ -9,6 +9,14 @@ import toast from "react-hot-toast";
 import { UseProducts } from "./productsContext";
 import { ReusableModal } from "../components/ReusableModal/ReusableModal";
 import { Trash2 } from "lucide-react";
+import styled from "styled-components";
+import { Button } from "../components";
+
+const Controls = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+`;
 
 interface adminProps {
     addProductToDelete: (id: number | undefined) => void;
@@ -77,17 +85,22 @@ export function AdminProvider({ children }: PropsWithChildren) {
         <AdminContext.Provider
             value={{ closeModal, openModal, addProductToDelete }}
         >
-            <ReusableModal
-                state={modalState}
-                closeModal={closeModal}
-                icon={<Trash2 />}
-                text={{
-                    title: "Estas seguro de querer borrar este producto?",
-                    subtitle: "Esta acción no se puede deshacer",
-                    buttonLabel: "eliminar",
-                }}
-                parentMethod={() => deleteProduct(productIdToDelete)}
-            />
+            <ReusableModal state={modalState} closeModal={closeModal}>
+                <Trash2 />
+                <div>
+                    <h2>Estas seguro de querer borrar este producto?</h2>
+                    <p>Esta acción no se puede deshacer</p>
+                </div>
+                <Controls>
+                    <Button parentMethod={closeModal}>cancelar</Button>
+                    <Button
+                        variant='destructive'
+                        parentMethod={() => deleteProduct(productIdToDelete)}
+                    >
+                        eliminar
+                    </Button>
+                </Controls>
+            </ReusableModal>
 
             {children}
         </AdminContext.Provider>
