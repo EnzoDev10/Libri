@@ -50,6 +50,7 @@ export const ProductsContextProvider = ({ children }: PropsWithChildren) => {
         imageUrl: "not a imageUrl",
         description: "not a description",
         price: 3456,
+        color: "not a color",
         quantity: 1,
     });
 

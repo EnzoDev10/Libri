@@ -7,6 +7,6 @@ export { CatalogCard } from "./Cards/CatalogCard";
 export { Books } from "./Books/Books";
 export { Footer } from "./Navigation/Footer/Footer";
 export { Wrapper } from "./Misc";
-export { CartCard } from "./Cards/CartCard";
+export { CartCard } from "./Cards/cartCard";
 export { AdminCard } from "./Cards/AdminCard";
 export { BookShowcase } from "./BookShowcase/BookShowcase";
