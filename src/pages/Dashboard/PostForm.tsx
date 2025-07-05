@@ -59,7 +59,7 @@ const FormInput = styled.input`
 
     &:focus {
         outline: none;
-        border-color: transparent;
+        border-color: light;
         box-shadow: 0 0 0 2px #3b82f6;
     }
 
@@ -83,7 +83,7 @@ const FormTextarea = styled.textarea`
 
     &:focus {
         outline: none;
-        border-color: transparent;
+        border-color: light;
         box-shadow: 0 0 0 2px #3b82f6;
     }
 
@@ -116,14 +116,11 @@ export const PostForm = () => {
     const [author, setAuthor] = useState("");
     const [coverId, setCoverId] = useState("");
     const [price, setPrice] = useState(0);
-    const [categories, setCategories] = useState("");
     const [description, setDescription] = useState("");
 
     const { setNeedToFetch } = UseProducts();
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        const arrOfCategories = categories.split(",");
 
         const newProduct: Book = {
             title: title,
@@ -131,7 +128,6 @@ export const PostForm = () => {
             coverId: coverId,
             price: price,
             quantity: 1,
-            categories: arrOfCategories,
             description: description,
         };
 
@@ -204,16 +200,7 @@ export const PostForm = () => {
                             placeholder='ej. 15000'
                         />
                     </FormGroup>
-                    <FormGroup>
-                        <FormLabel htmlFor='categories'>Categorias</FormLabel>
-                        <FormInput
-                            type='text'
-                            id='categories'
-                            required
-                            placeholder='ej. ficción,romance'
-                            onChange={(e) => setCategories(e.target.value)}
-                        />
-                    </FormGroup>
+
                     <FormGroup>
                         <FormLabel htmlFor='description'>descripción</FormLabel>
                         <FormTextarea
