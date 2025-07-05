@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 const BooksContainer = styled.section`
     display: flex;
-    gap: 20px;
-    padding: 20px 0;
+    gap: 10px;
+    padding: 10px 0;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;

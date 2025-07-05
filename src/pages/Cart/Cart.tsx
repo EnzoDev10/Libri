@@ -42,10 +42,6 @@ const CartCard = styled.div`
     border: 1px solid lightblue;
 
     padding: 40px;
-
-    @media (max-width: 480px) {
-        padding: 20px;
-    }
 `;
 
 const CartTitle = styled.h1`

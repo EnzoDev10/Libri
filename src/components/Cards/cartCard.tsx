@@ -6,47 +6,47 @@ import { UseCart } from "../../context/CartContext";
 import { formatPrice } from "../../helpers";
 import toast from "react-hot-toast";
 
-const CartItemDiv = styled.div`
+const ProductContainer = styled.article`
     display: flex;
     align-items: center;
-    padding: 16px 0;
     border-bottom: 1px solid #e5e7eb;
     gap: 16px;
     min-width: 100%;
+    padding: 16px 0;
 
     &:last-child {
         border-bottom: none;
     }
 `;
 
-const ItemImage = styled.div`
-    flex-shrink: 0;
+const ProductImage = styled.div`
     img {
-        height: 110px;
+        max-height: 120px;
         object-fit: cover;
         border-radius: var(--radius-small);
         background: #f3f4f6;
     }
 `;
 
-const ItemDetails = styled.div`
+const ProductDetails = styled.div`
     flex: 1;
-    min-width: 0;
-
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    justify-content: space-between;
+    height: 120px;
     button {
         padding: 5px 10px;
     }
 `;
 
-const ItemHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+const ProductHeader = styled.header`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     margin-bottom: 4px;
-    gap: 12px;
 `;
 
-const ItemTitle = styled.h3`
+const ProductTitle = styled.h3`
     font-size: 16px;
     font-weight: 600;
     line-height: 1.3;
@@ -61,7 +61,7 @@ const ItemTitle = styled.h3`
     }
 `;
 
-const ItemAuthor = styled.p`
+const ProductAuthor = styled.p`
     font-size: 14px;
     margin-bottom: 8px;
 
@@ -74,7 +74,7 @@ const ItemAuthor = styled.p`
     }
 `;
 
-const ItemControls = styled.div`
+const ProductControls = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,7 +85,7 @@ const ItemControls = styled.div`
     }
 `;
 
-const QuantitySeparator = styled.div`
+const QuantitiesContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
@@ -115,24 +115,11 @@ const Quantity = styled.span`
     font-weight: 500;
     min-width: 20px;
     text-align: center;
-
-    @media (max-width: 480px) {
-        font-size: 16px;
-        min-width: 24px;
-    }
 `;
 
 const Price = styled.span`
-    font-size: 16px;
+    justify-self: end;
     font-weight: 600;
-    flex-shrink: 0;
-
-    @media (max-width: 480px) {
-        font-size: 15px;
-    }
-    @media (max-width: 360px) {
-        font-size: 14px;
-    }
 `;
 
 const RemoveBtn = styled(Button)`
@@ -154,24 +141,19 @@ export const CartCard = ({ book }: { book: Book }) => {
 
     const imageUrl = book.imageUrl ? book.imageUrl : Cover;
     return (
-        <CartItemDiv>
-            <ItemImage>
-                <img
-                    height={110}
-                    width={70}
-                    src={imageUrl}
-                    alt={`${book.title} cover`}
-                />
-            </ItemImage>
+        <ProductContainer>
+            <ProductImage>
+                <img src={imageUrl} alt={`${book.title} cover`} />
+            </ProductImage>
 
-            <ItemDetails>
-                <ItemHeader>
-                    <ItemTitle>{book.title}</ItemTitle>
+            <ProductDetails>
+                <ProductHeader>
+                    <ProductTitle>{book.title}</ProductTitle>
                     <Price>{formatPrice(book.price)}</Price>
-                </ItemHeader>
-                <ItemAuthor>{book.author}</ItemAuthor>
-                <ItemControls>
-                    <QuantitySeparator>
+                    <ProductAuthor>{book.author}</ProductAuthor>
+                </ProductHeader>
+                <ProductControls>
+                    <QuantitiesContainer>
                         <QuantityBtn
                             variant='transparent'
                             aria-label='Decrease quantity'
@@ -187,7 +169,7 @@ export const CartCard = ({ book }: { book: Book }) => {
                         >
                             +
                         </QuantityBtn>
-                    </QuantitySeparator>
+                    </QuantitiesContainer>
                     <RemoveBtn
                         variant='destructive'
                         aria-label={`Remove ${book.title} from cart`}
@@ -200,8 +182,8 @@ export const CartCard = ({ book }: { book: Book }) => {
                     >
                         ×
                     </RemoveBtn>
-                </ItemControls>
-            </ItemDetails>
-        </CartItemDiv>
+                </ProductControls>
+            </ProductDetails>
+        </ProductContainer>
     );
 };
