@@ -17,13 +17,6 @@ const CartItemDiv = styled.div`
     &:last-child {
         border-bottom: none;
     }
-
-    @media (max-width: 480px) {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 20px 0;
-    }
 `;
 
 const ItemImage = styled.div`
@@ -51,12 +44,6 @@ const ItemHeader = styled.div`
     align-items: flex-start;
     margin-bottom: 4px;
     gap: 12px;
-
-    @media (max-width: 480px) {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
 `;
 
 const ItemTitle = styled.h3`
@@ -104,11 +91,6 @@ const QuantitySeparator = styled.div`
     gap: 5px;
     margin-right: auto;
 `;
-
-/* 
-! Cambiar los textos para aumentar, 
-! reducir o eliminar productos por iconos de lucide
-*/
 
 const QuantityBtn = styled(Button)`
     padding: 5px;
@@ -170,9 +152,7 @@ const RemoveBtn = styled(Button)`
 export const CartCard = ({ book }: { book: Book }) => {
     const { removeFromCart, updateQuantity } = UseCart();
 
-    const imageUrl = book.coverId
-        ? `https://Covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
-        : Cover;
+    const imageUrl = book.imageUrl ? book.imageUrl : Cover;
     return (
         <CartItemDiv>
             <ItemImage>

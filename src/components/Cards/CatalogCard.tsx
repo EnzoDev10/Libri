@@ -2,10 +2,8 @@ import { Button } from "../index";
 import styled from "styled-components";
 import type { Book } from "../../interfaces";
 import Cover from "./cover-placeholder.png";
-import { useExtractColors } from "react-extract-colors";
-import { UseCart } from "../../context/CartContext";
 import { formatPrice } from "../../helpers";
-import toast from "react-hot-toast";
+import { UseProducts } from "../../context/productsContext";
 
 // Styled-components based on card.css
 const CardArticle = styled.article`
@@ -47,7 +45,7 @@ const StyledImg = styled.img`
     width: 100%;
     margin-bottom: 15px;
     height: 200px;
-    z-index: 200;
+    z-index: 10;
     border: 1px solid #bbb;
     border-radius: 2.5px;
 `;
@@ -75,15 +73,16 @@ const BookBuy = styled.div`
     margin-top: 10px;
 `;
 
-export const CatalogCard = ({ book }: { book: Book }) => {
-    const { addToCart } = UseCart();
+interface CatalogCardProps {
+    book: Book;
+}
 
-    const imageUrl = book.coverId
-        ? `https://Covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
-        : Cover;
+export const CatalogCard = ({ book }: CatalogCardProps) => {
+    const { setBookToShowcase, toggleModal } = UseProducts();
 
-    const { dominantColor } = useExtractColors(imageUrl, { maxSize: 100 });
-    const color = dominantColor ? dominantColor : "#333";
+    const imageUrl = book.imageUrl ? book.imageUrl : Cover;
+
+    const color = book.color ? book.color : "#333";
 
     return (
         <CardArticle>
@@ -97,7 +96,7 @@ export const CatalogCard = ({ book }: { book: Book }) => {
                 <Bg color={color} />
             </ImageContainer>
             <BookInfo>
-                <div className='title-container'>
+                <div>
                     <Title title={book.title}>{book.title}</Title>
                     <CardParagraph className='author'>
                         {book.author}
@@ -109,15 +108,11 @@ export const CatalogCard = ({ book }: { book: Book }) => {
                     </CardParagraph>
                     <Button
                         parentMethod={() => {
-                            if (localStorage.getItem("authToken")) {
-                                addToCart(book);
-                                toast.success("Producto agregado al carrito.");
-                            } else {
-                                toast.error("no tienes una cuenta.");
-                            }
+                            setBookToShowcase(book);
+                            toggleModal();
                         }}
                     >
-                        Agregar
+                        ver más
                     </Button>
                 </BookBuy>
             </BookInfo>

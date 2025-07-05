@@ -10,6 +10,10 @@ interface productsProps {
     setNeedToFetch: Dispatch<SetStateAction<boolean>>;
     errorExists: boolean;
     isLoading: boolean;
+    bookToShowcase: Book;
+    setBookToShowcase: Dispatch<SetStateAction<Book>>;
+    modalState: boolean;
+    toggleModal: () => void;
 }
 const productsContext = createContext<productsProps | null>(null);
 
@@ -31,6 +35,23 @@ export const ProductsContextProvider = ({ children }: PropsWithChildren) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [errorExists, seterrorExists] = useState(false);
+
+    const [modalState, setModalState] = useState(false);
+
+    function toggleModal() {
+        setModalState((e) => {
+            return !e;
+        });
+    }
+
+    const [bookToShowcase, setBookToShowcase] = useState<Book>({
+        title: "not a book",
+        author: "not an author",
+        imageUrl: "not a imageUrl",
+        description: "not a description",
+        price: 3456,
+        quantity: 1,
+    });
 
     useEffect(() => {
         if (needToFetch == false) {
@@ -65,6 +86,10 @@ export const ProductsContextProvider = ({ children }: PropsWithChildren) => {
                 setNeedToFetch,
                 errorExists,
                 isLoading,
+                bookToShowcase,
+                setBookToShowcase,
+                modalState: modalState,
+                toggleModal: toggleModal,
             }}
         >
             {children}

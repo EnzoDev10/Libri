@@ -114,7 +114,7 @@ const SubmitButton = styled(Button)`
 export const PostForm = () => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
-    const [coverId, setCoverId] = useState("");
+    const [imageUrl, setimageUrl] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
 
@@ -122,10 +122,12 @@ export const PostForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const newProduct: Book = {
+        // quitar este partial cuando se actualice esto
+        
+        const newProduct: Partial<Book> = {
             title: title,
             author: author,
-            coverId: coverId,
+            imageUrl: imageUrl,
             price: price,
             quantity: 1,
             description: description,
@@ -179,15 +181,12 @@ export const PostForm = () => {
                         />
                     </FormGroup>
                     <FormGroup>
-                        <FormLabel htmlFor='coverId'>
-                            Identificador portada
-                        </FormLabel>
+                        <FormLabel htmlFor='imageUrl'>Url imágen</FormLabel>
                         <FormInput
                             type='string'
-                            id='coverId'
-                            required
-                            onChange={(e) => setCoverId(e.target.value)}
-                            placeholder='ej. Gabriel Garcia Marquez'
+                            id='imageUrl'
+                            onChange={(e) => setimageUrl(e.target.value)}
+                            placeholder='ej. https.covers.open-library.org'
                         />
                     </FormGroup>
                     <FormGroup>

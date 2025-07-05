@@ -8,6 +8,7 @@ import { PaginatedItems } from "./Pagination/Pagination";
 import { Wrapper } from "../Misc";
 import { useEffect, useState } from "react";
 import type { Book } from "../../interfaces";
+import { BookShowcase } from "../BookShowcase/BookShowcase";
 
 const Main = styled.main`
     background-color: var(--products-bg);
@@ -65,7 +66,8 @@ const Error = styled.div`
 `;
 
 export const Bookshelf = () => {
-    const { productsContent, isLoading, errorExists } = UseProducts();
+    const { productsContent, isLoading, errorExists, bookToShowcase } =
+        UseProducts();
 
     const [booksToShow, setBooksToShow] = useState<Book[] | []>(
         productsContent
@@ -120,10 +122,16 @@ export const Bookshelf = () => {
                             !isLoading &&
                             productsContent &&
                             !notFound && (
-                                <PaginatedItems
-                                    variant='bookshelf'
-                                    content={booksToShow}
-                                />
+                                <>
+                                    <BookShowcase
+                                        bookToShowcase={bookToShowcase}
+                                    />
+
+                                    <PaginatedItems
+                                        variant='bookshelf'
+                                        content={booksToShow}
+                                    />
+                                </>
                             )}
                     </Data>
                 </Section>

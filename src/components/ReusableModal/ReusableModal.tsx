@@ -4,9 +4,9 @@ import { type PropsWithChildren } from "react";
 
 interface Props extends PropsWithChildren {
     state: boolean;
-    closeModal: () => void;
+    toggleModal: () => void;
 }
-export const ReusableModal = ({ state, closeModal, children }: Props) => {
+export const ReusableModal = ({ state, toggleModal, children }: Props) => {
     Modal.setAppElement("#root");
 
     const customStyles = {
@@ -28,16 +28,18 @@ export const ReusableModal = ({ state, closeModal, children }: Props) => {
             opacity: "1",
             borderRadius: "var(--radius-small)",
             border: "1px solid lightblue",
+            zIndex: "300",
         },
         overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.8)",
+            zIndex: "20",
         },
     };
 
     return (
         <Modal
             isOpen={state}
-            onRequestClose={closeModal}
+            onRequestClose={toggleModal}
             contentLabel='Modal'
             style={customStyles}
             closeTimeoutMS={400}

@@ -85,7 +85,7 @@ export function AdminProvider({ children }: PropsWithChildren) {
         <AdminContext.Provider
             value={{ closeModal, openModal, addProductToDelete }}
         >
-            <ReusableModal state={modalState} closeModal={closeModal}>
+            <ReusableModal state={modalState} toggleModal={closeModal}>
                 <Trash2 />
                 <div>
                     <h2>Estas seguro de querer borrar este producto?</h2>

@@ -125,9 +125,8 @@ interface CardProp {
 export const AdminCard = ({ book }: CardProp) => {
     const { addProductToDelete } = UseAdminContext();
 
-    const imageUrl = book.coverId
-        ? `https://Covers.openlibrary.org/b/id/${book.coverId}-M.jpg`
-        : Cover;
+    const imageUrl = book.imageUrl ? book.imageUrl : Cover;
+
     return (
         <CartItemArticle>
             <ItemImage>
