@@ -1,9 +1,10 @@
-import { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import { Button } from "../../components";
-import type { Book } from "../../interfaces";
 import { UseProducts } from "../../context/productsContext";
+import { CircleAlert } from "lucide-react";
+
+import { useForm, type SubmitHandler } from "react-hook-form";
 
 const FormContainer = styled.div`
     background-color: var(--general-bg);
@@ -38,20 +39,23 @@ const Form = styled.form`
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
+    position: relative;
 `;
 
 const FormLabel = styled.label`
-    display: block;
+    display: flex;
+    flex-direction: column;
     font-size: 0.875rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
 `;
 
 const FormInput = styled.input`
-    color: var(--text-dark);
+    color: var(--text-light);
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
+    background-color: #333;
     border-radius: 0.375rem;
     font-size: 1rem;
     transition: all 0.2s ease-in-out;
@@ -68,16 +72,21 @@ const FormInput = styled.input`
     }
 `;
 
+const FormInputColor = styled.input`
+    width: 100%;
+`;
+
 const FormTextarea = styled.textarea`
     resize: vertical;
     max-height: 300px;
     min-height: 150px;
-    color: var(--text-dark);
+    color: var(--text-light);
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
     border-radius: 0.375rem;
     font-size: 1rem;
+    background-color: #333;
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
 
@@ -90,6 +99,31 @@ const FormTextarea = styled.textarea`
     &::placeholder {
         color: #9ca3af;
     }
+`;
+
+// El mismo componente en styled-components
+// rompe los colores de los demas componentes por un bug con la propiedad attrs.
+
+interface RightDistance {
+    distance?: number;
+}
+
+const ErrorIcon = ({ distance = 10 }: RightDistance) => {
+    return (
+        <CircleAlert
+            style={{
+                position: "absolute",
+                right: `${distance}px`,
+                bottom: " 10px",
+            }}
+            fill='var(--destructive)'
+            color='#fff'
+        />
+    );
+};
+
+const ErrorMessage = styled.span`
+    color: var(--destructive);
 `;
 
 const SubmitButton = styled(Button)`
@@ -111,34 +145,31 @@ const SubmitButton = styled(Button)`
     }
 `;
 
+interface Inputs {
+    title: string;
+    author: string;
+    imageUrl: string;
+    price: number;
+    description: string;
+    color: string;
+}
+
 export const PostForm = () => {
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [imageUrl, setimageUrl] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>();
 
     const { setNeedToFetch } = UseProducts();
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        // quitar este partial cuando se actualice esto
-        
-        const newProduct: Partial<Book> = {
-            title: title,
-            author: author,
-            imageUrl: imageUrl,
-            price: price,
-            quantity: 1,
-            description: description,
-        };
-
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        console.log(data);
         fetch(
             "https://6850a235e7c42cfd17992d31.mockapi.io/libri-api/productos",
             {
                 method: "POST",
                 headers: { "content-type": "application/json" },
-                body: JSON.stringify(newProduct),
+                body: JSON.stringify(data),
             }
         ).then((res) => {
             if (res.ok) {
@@ -159,57 +190,120 @@ export const PostForm = () => {
                         Asegurate de que toda información sea correcta
                     </FormSubtitle>
                 </FormHeader>
-                <Form className='form' id='postform' onSubmit={handleSubmit}>
+                <Form
+                    className='form'
+                    id='postform'
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <FormGroup>
-                        <FormLabel htmlFor='title'>Titulo</FormLabel>
+                        <FormLabel htmlFor='title'>
+                            Titulo *
+                            {errors.title && (
+                                <ErrorMessage>
+                                    El titulo no puede estar vacio.
+                                </ErrorMessage>
+                            )}
+                        </FormLabel>
+
                         <FormInput
                             type='text'
                             id='title'
-                            required
-                            onChange={(e) => setTitle(e.target.value)}
+                            {...register("title", { required: true })}
+                            minLength={1}
                             placeholder='ej. Cronica de una muerte anunciada'
                         />
+                        {errors.title && <ErrorIcon />}
                     </FormGroup>
                     <FormGroup>
-                        <FormLabel htmlFor='author'>Autor</FormLabel>
+                        <FormLabel htmlFor='author'>
+                            Autor *
+                            {errors.author && (
+                                <ErrorMessage>
+                                    El autor no puede estar vacio.
+                                </ErrorMessage>
+                            )}
+                        </FormLabel>
                         <FormInput
                             type='text'
                             id='author'
-                            required
-                            onChange={(e) => setAuthor(e.target.value)}
+                            {...register("author", { required: true })}
                             placeholder='ej. Gabriel Garcia Marquez'
                         />
-                    </FormGroup>
-                    <FormGroup>
-                        <FormLabel htmlFor='imageUrl'>Url imágen</FormLabel>
-                        <FormInput
-                            type='string'
-                            id='imageUrl'
-                            onChange={(e) => setimageUrl(e.target.value)}
-                            placeholder='ej. https.covers.open-library.org'
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <FormLabel htmlFor='price'>Precio</FormLabel>
-                        <FormInput
-                            type='number'
-                            id='price'
-                            required
-                            onChange={(e) => setPrice(+e.target.value)}
-                            placeholder='ej. 15000'
-                        />
+                        {errors.author && <ErrorIcon />}
                     </FormGroup>
 
                     <FormGroup>
-                        <FormLabel htmlFor='description'>descripción</FormLabel>
+                        <FormLabel htmlFor='imageUrl'>
+                            Imágen tapa
+                            {errors.imageUrl && (
+                                <ErrorMessage>
+                                    {errors.imageUrl?.message}
+                                </ErrorMessage>
+                            )}
+                        </FormLabel>
+                        <FormInput
+                            type='string'
+                            id='imageUrl'
+                            {...register("imageUrl", {
+                                pattern: {
+                                    value: /(https?:\/\/.*\.(?:png|jpg))/i,
+                                    message: "Introduce una URL valida.",
+                                },
+                            })}
+                            placeholder='ej. https.covers.open-library.org'
+                        />
+                        {errors.imageUrl && <ErrorIcon />}
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel htmlFor='price'>
+                            Precio *
+                            {errors.price && (
+                                <ErrorMessage>
+                                    El precio debe ser mayor a 0.
+                                </ErrorMessage>
+                            )}
+                        </FormLabel>
+                        <FormInput
+                            type='number'
+                            id='price'
+                            {...register("price", { required: true })}
+                            min={1}
+                            placeholder='ej. 15000'
+                        />
+                        {errors.price && <ErrorIcon distance={40} />}
+                    </FormGroup>
+
+                    <FormGroup>
+                        <FormLabel htmlFor='description'>
+                            Descripción *
+                            {errors.description && (
+                                <ErrorMessage>
+                                    La descripción no puede tener menos de 10
+                                    caracteres.
+                                </ErrorMessage>
+                            )}
+                        </FormLabel>
                         <FormTextarea
-                            name=''
                             id='description'
-                            required
+                            {...register("description", {
+                                required: true,
+                                minLength: 10,
+                                maxLength: 200,
+                            })}
                             placeholder='ej. Basada en un suceso real, la reconstrucción literaria, laberíntica y polifónica del ineluctable y brutal asesinato de un hombre en una remota población fluvial caribeña significa la apuesta más arriesgada de Gabriel García Márquez hacia una novela total.'
-                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                        {errors.description && <ErrorIcon />}
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel htmlFor='color'>Color de fondo</FormLabel>
+                        <FormInputColor
+                            type='color'
+                            id='color'
+                            {...register("color")}
+                            defaultValue='#06494b'
                         />
                     </FormGroup>
+                    {/* ! Crear un generador de colores aleatorios */}
 
                     <SubmitButton>Registrarse</SubmitButton>
                 </Form>
