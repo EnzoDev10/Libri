@@ -49,10 +49,6 @@ const CartTitle = styled.h1`
     font-weight: 600;
     text-align: center;
     margin-bottom: 8px;
-
-    @media (max-width: 480px) {
-        font-size: 24px;
-    }
 `;
 
 const CartSubtitle = styled.p`
@@ -104,24 +100,12 @@ const EmptyCartActions = styled.div`
     grid-template-columns: 1fr;
 
     a {
-        padding: 10px 50px;
+        padding: 10px 20px;
     }
 `;
 
 const ContinueShoppingBtn = styled(Button)`
-    &:hover {
-        background: #1d4ed8;
-        color: white;
-    }
-    &:focus {
-        outline: 2px solid #1d4ed8;
-        outline-offset: 2px;
-    }
-
-    @media (max-width: 480px) {
-        padding: 14px 20px;
-        font-size: 16px;
-    }
+    font-size: 15px;
 `;
 
 const CheckoutBtn = styled(Button)`
@@ -220,7 +204,10 @@ export const CartContent = () => {
                     </Button>
 
                     <CheckoutBtn
-                        parentMethod={() => toast.success("Compra realizada.")}
+                        parentMethod={() => {
+                            toast.success("Compra realizada.");
+                            emptyCart();
+                        }}
                     >
                         Comprar
                     </CheckoutBtn>
