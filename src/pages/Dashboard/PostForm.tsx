@@ -2,9 +2,9 @@ import styled from "styled-components";
 import toast from "react-hot-toast";
 import { Button } from "../../components";
 import { UseProducts } from "../../context/productsContext";
-import { CircleAlert } from "lucide-react";
+import { CircleAlert, Dices } from "lucide-react";
 
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler, Controller } from "react-hook-form";
 
 const FormContainer = styled.div`
     background-color: var(--general-bg);
@@ -54,7 +54,7 @@ const FormInput = styled.input`
     color: var(--text-light);
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid #999;
     background-color: #333;
     border-radius: 0.375rem;
     font-size: 1rem;
@@ -83,7 +83,7 @@ const FormTextarea = styled.textarea`
     color: var(--text-light);
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid #999;
     border-radius: 0.375rem;
     font-size: 1rem;
     background-color: #333;
@@ -98,6 +98,26 @@ const FormTextarea = styled.textarea`
 
     &::placeholder {
         color: #9ca3af;
+    }
+`;
+
+const ColorInputWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+`;
+
+const RandomColorButton = styled.button`
+    padding: 0.5rem 1rem;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+    &:hover {
+        background: #444;
     }
 `;
 
@@ -145,6 +165,16 @@ const SubmitButton = styled(Button)`
     }
 `;
 
+const getRandomColor = () => {
+    let hexCode = "#";
+
+    while (hexCode.length < 7) {
+        hexCode += Math.round(Math.random() * 15).toString(16);
+    }
+
+    return hexCode;
+};
+
 interface Inputs {
     title: string;
     author: string;
@@ -158,6 +188,8 @@ export const PostForm = () => {
     const {
         register,
         handleSubmit,
+        control,
+        setValue,
         formState: { errors },
     } = useForm<Inputs>();
 
@@ -296,15 +328,31 @@ export const PostForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <FormLabel htmlFor='color'>Color de fondo</FormLabel>
-                        <FormInputColor
-                            type='color'
-                            id='color'
-                            {...register("color")}
+                        <Controller
+                            name='color'
+                            control={control}
                             defaultValue='#06494b'
+                            render={({ field }) => (
+                                <ColorInputWrapper>
+                                    <FormInputColor
+                                        type='color'
+                                        id='color'
+                                        {...field}
+                                        value={field.value || "#06494b"}
+                                    />
+                                    <RandomColorButton
+                                        onClick={() =>
+                                            setValue("color", getRandomColor())
+                                        }
+                                        type='button'
+                                        aria-label='Color aleatorio'
+                                    >
+                                        <Dices />
+                                    </RandomColorButton>
+                                </ColorInputWrapper>
+                            )}
                         />
                     </FormGroup>
-                    {/* ! Crear un generador de colores aleatorios */}
-
                     <SubmitButton>Registrarse</SubmitButton>
                 </Form>
             </FormContainer>
