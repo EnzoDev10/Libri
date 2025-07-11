@@ -353,7 +353,7 @@ export const PostForm = () => {
                             )}
                         />
                     </FormGroup>
-                    <SubmitButton>Registrarse</SubmitButton>
+                    <SubmitButton>crear producto</SubmitButton>
                 </Form>
             </FormContainer>
         </>
