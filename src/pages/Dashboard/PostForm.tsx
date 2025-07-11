@@ -190,6 +190,7 @@ export const PostForm = () => {
         handleSubmit,
         control,
         setValue,
+        reset,
         formState: { errors },
     } = useForm<Inputs>();
 
@@ -207,6 +208,7 @@ export const PostForm = () => {
             if (res.ok) {
                 toast.success("Producto agregado al catálogo.");
                 setNeedToFetch(true);
+                reset();
             } else {
                 toast.error("El producto no pudo ser agregado al catálogo.");
             }
