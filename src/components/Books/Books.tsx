@@ -13,6 +13,8 @@ const BooksContainer = styled.section`
     width: 100%;
 `;
 
+/* ! Crear una transición entre los productos  */
+
 interface Props {
     arrayOfBooks: Book[] | [];
     variant: "bookshelf" | "cart" | "admin";
