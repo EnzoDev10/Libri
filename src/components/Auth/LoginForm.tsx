@@ -185,7 +185,7 @@ export const LoginForm = () => {
                                     <CheckboxLabel>Recuerdame</CheckboxLabel>
                                 </CheckboxWrapper>
                             </FormOptions> */}
-                            <SubmitButton>Registrarse</SubmitButton>
+                            <SubmitButton>registrarse</SubmitButton>
                         </Form>
                     </FormContainer>
                 </LoginContainer>
