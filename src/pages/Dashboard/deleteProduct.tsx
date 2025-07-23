@@ -7,7 +7,7 @@ const DeleteContainer = styled.div`
     border-radius: 0.5rem;
     padding: 2rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 500px;
 
     ul {
         display: flex;
