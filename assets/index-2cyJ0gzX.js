@@ -1010,6 +1010,7 @@ https://fb.me/react-async-component-lifecycle-hooks`)}if(typeof n.getDerivedStat
     border-radius: 0.5rem;
     padding: 2rem;
     width: 100%;
+    max-width: 400px;
 `,F_=P.div`
     margin-bottom: 1.5rem;
 `,J_=P.h2`
@@ -1120,7 +1121,7 @@ https://fb.me/react-async-component-lifecycle-hooks`)}if(typeof n.getDerivedStat
     border-radius: 0.5rem;
     padding: 2rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 500px;
 
     ul {
         display: flex;
